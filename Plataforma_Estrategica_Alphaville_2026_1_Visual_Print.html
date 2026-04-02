@@ -1,0 +1,1880 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_34327e831b0698c25756a69eeaa4dcb6 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+</head>
+<body>
+    
+    
+<style>
+    .legend-panel { position: fixed; bottom: 25px; right: 15px; padding: 15px; font-size: 11px; z-index: 1000; width: 220px; background: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); font-family: 'Segoe UI', sans-serif; }
+</style>
+<div class="legend-panel">
+    <b style="color:#003366; text-transform:uppercase; font-size:10px;">Legenda</b><hr style="margin:5px 0">
+    <div style="margin-bottom:10px;">
+        <div><i class="fa fa-star" style="color:darkblue"></i> Cliente Master</div>
+        <div><i class="fa fa-graduation-cap" style="color:red"></i> Concorrência</div>
+        <div><i class="fa fa-eye" style="color:green"></i> Mídia OOH / DOOH</div>
+    </div>
+    <b style="color:#003366; text-transform:uppercase; font-size:10px;">Polos de Fluxo (PGF)</b><hr style="margin:5px 0">
+    <div>
+        <div><i class="fa fa-shopping-cart" style="color:purple"></i> Consumo & Lazer</div>
+        <div><i class="fa fa-h-square" style="color:orange"></i> Saúde & Educação</div>
+        <div><i class="fa fa-bus" style="color:black"></i> Terminal / Hub</div>
+        <div><i class="fa fa-briefcase" style="color:blue"></i> Serviços & Negócios</div>
+    </div>
+</div>
+    
+            <div class="folium-map" id="map_34327e831b0698c25756a69eeaa4dcb6" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_34327e831b0698c25756a69eeaa4dcb6 = L.map(
+                "map_34327e831b0698c25756a69eeaa4dcb6",
+                {
+                    center: [-23.508191090909087, -46.84219214545454],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 13,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_34327e831b0698c25756a69eeaa4dcb6);
+
+            
+
+        
+    
+            var tile_layer_2d0f93ad77a6d2409b0ab8487af6004d = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_2d0f93ad77a6d2409b0ab8487af6004d.addTo(map_34327e831b0698c25756a69eeaa4dcb6);
+        
+    
+            var tile_layer_ad9a5b0d435da6ea3c2f48159b17ef36 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "\u0026copy; CARTO",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_ad9a5b0d435da6ea3c2f48159b17ef36.addTo(map_34327e831b0698c25756a69eeaa4dcb6);
+        
+    
+            var feature_group_4554ca06bb22489247b6f9757dd04d6f = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_dd8ce24ed4179ee56da7a3fbe3ac3692 = L.circle(
+                [-23.4677322, -46.8723482],
+                {"bubblingMouseEvents": true, "color": "#003366", "dashArray": "5,10", "dashOffset": null, "fill": false, "fillColor": "#003366", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5000, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_4554ca06bb22489247b6f9757dd04d6f);
+        
+    
+            feature_group_4554ca06bb22489247b6f9757dd04d6f.addTo(map_34327e831b0698c25756a69eeaa4dcb6);
+        
+    
+            var feature_group_6324d0897d9a782daf44cb9ca5b1035e = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var feature_group_f96585ce67f45cdbd264195566b9094d = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_bcfef4917461c56f07231bbcda006adc = L.marker(
+                [-23.46773469999999, -46.8699127],
+                {
+}
+            ).addTo(feature_group_f96585ce67f45cdbd264195566b9094d);
+        
+    
+            var icon_7c90f8e1bae4a46f9f9bf45c7b8f5ef6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "h-square",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_94e5636db5bfa8e159f3532fcdee10e6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d9a767c83d101e245c742b5393b4f1b8 = $(`<div id="html_d9a767c83d101e245c742b5393b4f1b8" style="width: 100.0%; height: 100.0%;">UNIP - Alphaville</div>`)[0];
+                popup_94e5636db5bfa8e159f3532fcdee10e6.setContent(html_d9a767c83d101e245c742b5393b4f1b8);
+            
+        
+
+        marker_bcfef4917461c56f07231bbcda006adc.bindPopup(popup_94e5636db5bfa8e159f3532fcdee10e6)
+        ;
+
+        
+    
+    
+                marker_bcfef4917461c56f07231bbcda006adc.setIcon(icon_7c90f8e1bae4a46f9f9bf45c7b8f5ef6);
+            
+    
+            var marker_d2075c87ffb9c918c653be6500b17d27 = L.marker(
+                [-23.5006507, -46.8582984],
+                {
+}
+            ).addTo(feature_group_f96585ce67f45cdbd264195566b9094d);
+        
+    
+            var icon_96a0f5bf9efbe78b95fe7bd749a157dd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "h-square",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_899c7469a71b3f7a4f8712be0fc9357f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a7129821cd70a36ceeaf7830b2503139 = $(`<div id="html_a7129821cd70a36ceeaf7830b2503139" style="width: 100.0%; height: 100.0%;">Unidade Einstein Alphaville</div>`)[0];
+                popup_899c7469a71b3f7a4f8712be0fc9357f.setContent(html_a7129821cd70a36ceeaf7830b2503139);
+            
+        
+
+        marker_d2075c87ffb9c918c653be6500b17d27.bindPopup(popup_899c7469a71b3f7a4f8712be0fc9357f)
+        ;
+
+        
+    
+    
+                marker_d2075c87ffb9c918c653be6500b17d27.setIcon(icon_96a0f5bf9efbe78b95fe7bd749a157dd);
+            
+    
+            var marker_f3da3ab63b77477c50165e7b7833e91e = L.marker(
+                [-23.472349, -46.83027999999999],
+                {
+}
+            ).addTo(feature_group_f96585ce67f45cdbd264195566b9094d);
+        
+    
+            var icon_770341a823f3db2d7d6fc33585783fd4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "h-square",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9ce008a6f5b4491f623a1f5320a29744 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d786d3d993177aa6f08d88bc53115765 = $(`<div id="html_d786d3d993177aa6f08d88bc53115765" style="width: 100.0%; height: 100.0%;">Escola Morumbi Alphaville</div>`)[0];
+                popup_9ce008a6f5b4491f623a1f5320a29744.setContent(html_d786d3d993177aa6f08d88bc53115765);
+            
+        
+
+        marker_f3da3ab63b77477c50165e7b7833e91e.bindPopup(popup_9ce008a6f5b4491f623a1f5320a29744)
+        ;
+
+        
+    
+    
+                marker_f3da3ab63b77477c50165e7b7833e91e.setIcon(icon_770341a823f3db2d7d6fc33585783fd4);
+            
+    
+            var marker_bc597eee05b18e8c7a39d4fd9fa48814 = L.marker(
+                [-23.5111982, -46.8719826],
+                {
+}
+            ).addTo(feature_group_f96585ce67f45cdbd264195566b9094d);
+        
+    
+            var icon_fb08157bbff53a5997108f40af7f3bd7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "h-square",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1aa058f6f86f00d33be88992de141d92 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c18591fdc219d30ea1f09b13f60772cb = $(`<div id="html_c18591fdc219d30ea1f09b13f60772cb" style="width: 100.0%; height: 100.0%;">Pronto-Socorro e Maternidade Nair Fonseca Leitão Arantes</div>`)[0];
+                popup_1aa058f6f86f00d33be88992de141d92.setContent(html_c18591fdc219d30ea1f09b13f60772cb);
+            
+        
+
+        marker_bc597eee05b18e8c7a39d4fd9fa48814.bindPopup(popup_1aa058f6f86f00d33be88992de141d92)
+        ;
+
+        
+    
+    
+                marker_bc597eee05b18e8c7a39d4fd9fa48814.setIcon(icon_fb08157bbff53a5997108f40af7f3bd7);
+            
+    
+            var marker_4c4c3d6553e644e4e97650c8b1b24516 = L.marker(
+                [-23.5028432, -46.8783489],
+                {
+}
+            ).addTo(feature_group_f96585ce67f45cdbd264195566b9094d);
+        
+    
+            var icon_709c8f3b69517bbf0f4ff6c1d314d365 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "h-square",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0e6cd9ef34a7d9733894d926f611a188 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_673074b54349c0656fb81a19e88ea1b7 = $(`<div id="html_673074b54349c0656fb81a19e88ea1b7" style="width: 100.0%; height: 100.0%;">Hospitalis Núcleo Hospitalar Barueri</div>`)[0];
+                popup_0e6cd9ef34a7d9733894d926f611a188.setContent(html_673074b54349c0656fb81a19e88ea1b7);
+            
+        
+
+        marker_4c4c3d6553e644e4e97650c8b1b24516.bindPopup(popup_0e6cd9ef34a7d9733894d926f611a188)
+        ;
+
+        
+    
+    
+                marker_4c4c3d6553e644e4e97650c8b1b24516.setIcon(icon_709c8f3b69517bbf0f4ff6c1d314d365);
+            
+    
+            var marker_63bc0d5978e72c53ee1ef48d64bb6893 = L.marker(
+                [-23.5017452, -46.84208829999999],
+                {
+}
+            ).addTo(feature_group_f96585ce67f45cdbd264195566b9094d);
+        
+    
+            var icon_e3f12c95919be8446d17ab5b1c15b664 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "h-square",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_97fd34d1a30b7cf44b3c412c78b0de35 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cb9f069d7aec25ec99db444e62fad1d7 = $(`<div id="html_cb9f069d7aec25ec99db444e62fad1d7" style="width: 100.0%; height: 100.0%;">Clínica Vascular Bessa</div>`)[0];
+                popup_97fd34d1a30b7cf44b3c412c78b0de35.setContent(html_cb9f069d7aec25ec99db444e62fad1d7);
+            
+        
+
+        marker_63bc0d5978e72c53ee1ef48d64bb6893.bindPopup(popup_97fd34d1a30b7cf44b3c412c78b0de35)
+        ;
+
+        
+    
+    
+                marker_63bc0d5978e72c53ee1ef48d64bb6893.setIcon(icon_e3f12c95919be8446d17ab5b1c15b664);
+            
+    
+            var marker_de84f6bc1cdb151ef4967998bcb80956 = L.marker(
+                [-23.5190657, -46.83270419999999],
+                {
+}
+            ).addTo(feature_group_f96585ce67f45cdbd264195566b9094d);
+        
+    
+            var icon_eca8995ba80fee4ba7c0e5852f9654b0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "h-square",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2463637c7b56ee867c57829344da17a3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_af6bee15d4fc130a47d4d2e0cd136a3b = $(`<div id="html_af6bee15d4fc130a47d4d2e0cd136a3b" style="width: 100.0%; height: 100.0%;">Unidade Estácio</div>`)[0];
+                popup_2463637c7b56ee867c57829344da17a3.setContent(html_af6bee15d4fc130a47d4d2e0cd136a3b);
+            
+        
+
+        marker_de84f6bc1cdb151ef4967998bcb80956.bindPopup(popup_2463637c7b56ee867c57829344da17a3)
+        ;
+
+        
+    
+    
+                marker_de84f6bc1cdb151ef4967998bcb80956.setIcon(icon_eca8995ba80fee4ba7c0e5852f9654b0);
+            
+    
+            var feature_group_f6fec076c1993684b86f60fcc7ffcf4e = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_e1c88e0f1bb867630a69d9280ea05f8b = L.marker(
+                [-23.4433384, -46.8990416],
+                {
+}
+            ).addTo(feature_group_f6fec076c1993684b86f60fcc7ffcf4e);
+        
+    
+            var icon_93f2f0263f927f615482da592cb346f8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "black",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_80e2b581710b6495b46a858c5385c2ad = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_70635a1cbaf82a40041b8eb6708ebe7c = $(`<div id="html_70635a1cbaf82a40041b8eb6708ebe7c" style="width: 100.0%; height: 100.0%;">Terminal Rodoviário Alphaville (Santana de Parnaíba)</div>`)[0];
+                popup_80e2b581710b6495b46a858c5385c2ad.setContent(html_70635a1cbaf82a40041b8eb6708ebe7c);
+            
+        
+
+        marker_e1c88e0f1bb867630a69d9280ea05f8b.bindPopup(popup_80e2b581710b6495b46a858c5385c2ad)
+        ;
+
+        
+    
+    
+                marker_e1c88e0f1bb867630a69d9280ea05f8b.setIcon(icon_93f2f0263f927f615482da592cb346f8);
+            
+    
+            var marker_3509060a093ab3e7052ba2a4c29eb6da = L.marker(
+                [-23.5120794, -46.8754497],
+                {
+}
+            ).addTo(feature_group_f6fec076c1993684b86f60fcc7ffcf4e);
+        
+    
+            var icon_af85ad568ae98577136495ace5affa79 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "black",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8dcc9255d0c1b5f7fe9b3838ce062187 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d56d1ff904d1fee61282410e17720b80 = $(`<div id="html_d56d1ff904d1fee61282410e17720b80" style="width: 100.0%; height: 100.0%;">Terminal Rodoferroviário Gualberto Tolaine (Barueri)</div>`)[0];
+                popup_8dcc9255d0c1b5f7fe9b3838ce062187.setContent(html_d56d1ff904d1fee61282410e17720b80);
+            
+        
+
+        marker_3509060a093ab3e7052ba2a4c29eb6da.bindPopup(popup_8dcc9255d0c1b5f7fe9b3838ce062187)
+        ;
+
+        
+    
+    
+                marker_3509060a093ab3e7052ba2a4c29eb6da.setIcon(icon_af85ad568ae98577136495ace5affa79);
+            
+    
+            var marker_7c65331ca07ec6457075fdcd86c0c3ea = L.marker(
+                [-23.5126077, -46.875075],
+                {
+}
+            ).addTo(feature_group_f6fec076c1993684b86f60fcc7ffcf4e);
+        
+    
+            var icon_b5faefd086cb4c3538016989d036ab85 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "black",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5bf59cef82604347d9d1163e51297fdc = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2800fe679a5d9776be05c947bb1fa45f = $(`<div id="html_2800fe679a5d9776be05c947bb1fa45f" style="width: 100.0%; height: 100.0%;">Barueri (Barueri)</div>`)[0];
+                popup_5bf59cef82604347d9d1163e51297fdc.setContent(html_2800fe679a5d9776be05c947bb1fa45f);
+            
+        
+
+        marker_7c65331ca07ec6457075fdcd86c0c3ea.bindPopup(popup_5bf59cef82604347d9d1163e51297fdc)
+        ;
+
+        
+    
+    
+                marker_7c65331ca07ec6457075fdcd86c0c3ea.setIcon(icon_b5faefd086cb4c3538016989d036ab85);
+            
+    
+            var marker_f94f11ad68bfcda7c0855fcbf6954037 = L.marker(
+                [-23.4783107, -46.8052833],
+                {
+}
+            ).addTo(feature_group_f6fec076c1993684b86f60fcc7ffcf4e);
+        
+    
+            var icon_ca8f950e8269df5b9253e292c8833e56 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "black",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_35b915ae4953beb76f81d1e04eccb6c3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ea9164707775406f2748064380d829e5 = $(`<div id="html_ea9164707775406f2748064380d829e5" style="width: 100.0%; height: 100.0%;">Terminal Rodoviário Gumercindo Modesto de Faria (Barueri)</div>`)[0];
+                popup_35b915ae4953beb76f81d1e04eccb6c3.setContent(html_ea9164707775406f2748064380d829e5);
+            
+        
+
+        marker_f94f11ad68bfcda7c0855fcbf6954037.bindPopup(popup_35b915ae4953beb76f81d1e04eccb6c3)
+        ;
+
+        
+    
+    
+                marker_f94f11ad68bfcda7c0855fcbf6954037.setIcon(icon_ca8f950e8269df5b9253e292c8833e56);
+            
+    
+            var marker_be7897cc25e437de154271e5d1d8a088 = L.marker(
+                [-23.5170734, -46.8583297],
+                {
+}
+            ).addTo(feature_group_f6fec076c1993684b86f60fcc7ffcf4e);
+        
+    
+            var icon_ae90d38e4b2058e86341148b09ef8556 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "black",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ce0e54dace7c2e7d86fd3aaa1d08433c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0ba0100cba7235489e5534a48f9b974b = $(`<div id="html_0ba0100cba7235489e5534a48f9b974b" style="width: 100.0%; height: 100.0%;">Antônio João (Barueri)</div>`)[0];
+                popup_ce0e54dace7c2e7d86fd3aaa1d08433c.setContent(html_0ba0100cba7235489e5534a48f9b974b);
+            
+        
+
+        marker_be7897cc25e437de154271e5d1d8a088.bindPopup(popup_ce0e54dace7c2e7d86fd3aaa1d08433c)
+        ;
+
+        
+    
+    
+                marker_be7897cc25e437de154271e5d1d8a088.setIcon(icon_ae90d38e4b2058e86341148b09ef8556);
+            
+    
+            var marker_d031d486aa7ff74d09c40c308efbbbff = L.marker(
+                [-23.5142111, -46.8893192],
+                {
+}
+            ).addTo(feature_group_f6fec076c1993684b86f60fcc7ffcf4e);
+        
+    
+            var icon_d69df805796b02d42f7268ef588b3853 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "black",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a36acba300c08d7a86a4543191e0cb96 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3b74d99890243111006f88e066200b6b = $(`<div id="html_3b74d99890243111006f88e066200b6b" style="width: 100.0%; height: 100.0%;">Jardim Belval (Barueri)</div>`)[0];
+                popup_a36acba300c08d7a86a4543191e0cb96.setContent(html_3b74d99890243111006f88e066200b6b);
+            
+        
+
+        marker_d031d486aa7ff74d09c40c308efbbbff.bindPopup(popup_a36acba300c08d7a86a4543191e0cb96)
+        ;
+
+        
+    
+    
+                marker_d031d486aa7ff74d09c40c308efbbbff.setIcon(icon_d69df805796b02d42f7268ef588b3853);
+            
+    
+            var marker_5981da917d9ea827463ec069ae5cc8e1 = L.marker(
+                [-23.5234955, -46.8935269],
+                {
+}
+            ).addTo(feature_group_f6fec076c1993684b86f60fcc7ffcf4e);
+        
+    
+            var icon_b675662c8e99193916948f0aa3c6a49f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "black",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_608f380468488c2f1c89246723cfe253 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_911349140a7a27eefe88ba1cc5312158 = $(`<div id="html_911349140a7a27eefe88ba1cc5312158" style="width: 100.0%; height: 100.0%;">Jardim Silveira (Barueri)</div>`)[0];
+                popup_608f380468488c2f1c89246723cfe253.setContent(html_911349140a7a27eefe88ba1cc5312158);
+            
+        
+
+        marker_5981da917d9ea827463ec069ae5cc8e1.bindPopup(popup_608f380468488c2f1c89246723cfe253)
+        ;
+
+        
+    
+    
+                marker_5981da917d9ea827463ec069ae5cc8e1.setIcon(icon_b675662c8e99193916948f0aa3c6a49f);
+            
+    
+            var marker_ac51cf695279ecb5293f7dbfd6eea97b = L.marker(
+                [-23.5246644, -46.8935011],
+                {
+}
+            ).addTo(feature_group_f6fec076c1993684b86f60fcc7ffcf4e);
+        
+    
+            var icon_5559ea2853c2d08e8bb3b75b9842ef5d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "black",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_002c03fc2e8fee3ee2cd12e4eecbdd02 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_445d9580df0b406d5f75bcc97bfcd86f = $(`<div id="html_445d9580df0b406d5f75bcc97bfcd86f" style="width: 100.0%; height: 100.0%;">Terminal Rodoviário Vereador Geraldo Correia (Barueri)</div>`)[0];
+                popup_002c03fc2e8fee3ee2cd12e4eecbdd02.setContent(html_445d9580df0b406d5f75bcc97bfcd86f);
+            
+        
+
+        marker_ac51cf695279ecb5293f7dbfd6eea97b.bindPopup(popup_002c03fc2e8fee3ee2cd12e4eecbdd02)
+        ;
+
+        
+    
+    
+                marker_ac51cf695279ecb5293f7dbfd6eea97b.setIcon(icon_5559ea2853c2d08e8bb3b75b9842ef5d);
+            
+    
+            var marker_9dc45cd5a8fbb93264b7645478eb6b16 = L.marker(
+                [-23.5416275, -46.8685262],
+                {
+}
+            ).addTo(feature_group_f6fec076c1993684b86f60fcc7ffcf4e);
+        
+    
+            var icon_d4953f72fea191f61b6e58a104afb89d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "black",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8c9ccc6fa9bdc2f860cfd28f04b22999 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7b595305bd6133e9f1a8dbe70bcf2e11 = $(`<div id="html_7b595305bd6133e9f1a8dbe70bcf2e11" style="width: 100.0%; height: 100.0%;">Terminal Rodoviário Arnaldo Milan (Barueri)</div>`)[0];
+                popup_8c9ccc6fa9bdc2f860cfd28f04b22999.setContent(html_7b595305bd6133e9f1a8dbe70bcf2e11);
+            
+        
+
+        marker_9dc45cd5a8fbb93264b7645478eb6b16.bindPopup(popup_8c9ccc6fa9bdc2f860cfd28f04b22999)
+        ;
+
+        
+    
+    
+                marker_9dc45cd5a8fbb93264b7645478eb6b16.setIcon(icon_d4953f72fea191f61b6e58a104afb89d);
+            
+    
+            var marker_c9f336aec45352667f06d658dd8146c6 = L.marker(
+                [-23.5476094, -46.8910403],
+                {
+}
+            ).addTo(feature_group_f6fec076c1993684b86f60fcc7ffcf4e);
+        
+    
+            var icon_08d37f624b88052b3d4691115cddfc50 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "black",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8193c218af87d0fbc608c2e5b379c270 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0c9c0c34e6a09889dc8ad0193faba9ac = $(`<div id="html_0c9c0c34e6a09889dc8ad0193faba9ac" style="width: 100.0%; height: 100.0%;">Terminal Rodoviário Maurício Bernadinelli - Mauro Paranaense (Barueri)</div>`)[0];
+                popup_8193c218af87d0fbc608c2e5b379c270.setContent(html_0c9c0c34e6a09889dc8ad0193faba9ac);
+            
+        
+
+        marker_c9f336aec45352667f06d658dd8146c6.bindPopup(popup_8193c218af87d0fbc608c2e5b379c270)
+        ;
+
+        
+    
+    
+                marker_c9f336aec45352667f06d658dd8146c6.setIcon(icon_08d37f624b88052b3d4691115cddfc50);
+            
+    
+            var marker_ca6b724c7868d149d296783fa6f4f982 = L.marker(
+                [-23.4444396, -46.9175435],
+                {
+}
+            ).addTo(feature_group_f6fec076c1993684b86f60fcc7ffcf4e);
+        
+    
+            var icon_9259c7a71f59da6e96fd1220e6e2111b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "black",
+  "iconColor": "white",
+  "icon": "bus",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2cac202fc7ae78275bd3e090096b1c6e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7b9a7e7d115f7b93647dd8d9df303d26 = $(`<div id="html_7b9a7e7d115f7b93647dd8d9df303d26" style="width: 100.0%; height: 100.0%;">Terminal Municipal de Santana de Parnaíba (Santana de Parnaíba)</div>`)[0];
+                popup_2cac202fc7ae78275bd3e090096b1c6e.setContent(html_7b9a7e7d115f7b93647dd8d9df303d26);
+            
+        
+
+        marker_ca6b724c7868d149d296783fa6f4f982.bindPopup(popup_2cac202fc7ae78275bd3e090096b1c6e)
+        ;
+
+        
+    
+    
+                marker_ca6b724c7868d149d296783fa6f4f982.setIcon(icon_9259c7a71f59da6e96fd1220e6e2111b);
+            
+    
+            var feature_group_bbcf474fdd6b98628ecf4a086f20338d = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_fc9febbdc60201dc6aa9480bba495dc3 = L.marker(
+                [-23.509459, -46.86518179999999],
+                {
+}
+            ).addTo(feature_group_bbcf474fdd6b98628ecf4a086f20338d);
+        
+    
+            var icon_67ebb9fefe9c2419a5d2ce7dbca6546a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "briefcase",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_33c97cc0d80498672bfbbd0bd5b2a962 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8156cfe2787ba65d667ef380852eda3c = $(`<div id="html_8156cfe2787ba65d667ef380852eda3c" style="width: 100.0%; height: 100.0%;">Câmara Municipal de Barueri</div>`)[0];
+                popup_33c97cc0d80498672bfbbd0bd5b2a962.setContent(html_8156cfe2787ba65d667ef380852eda3c);
+            
+        
+
+        marker_fc9febbdc60201dc6aa9480bba495dc3.bindPopup(popup_33c97cc0d80498672bfbbd0bd5b2a962)
+        ;
+
+        
+    
+    
+                marker_fc9febbdc60201dc6aa9480bba495dc3.setIcon(icon_67ebb9fefe9c2419a5d2ce7dbca6546a);
+            
+    
+            var marker_5c2f32117b95e859d5991f36c922a341 = L.marker(
+                [-23.509382, -46.875071],
+                {
+}
+            ).addTo(feature_group_bbcf474fdd6b98628ecf4a086f20338d);
+        
+    
+            var icon_ffcb569d7a326dbc2abc572cb9a7ae0a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "briefcase",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_44a66fdc7976cdb0435371f0f56f5923 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_56f505370f5e0a1fbf608fceabb66443 = $(`<div id="html_56f505370f5e0a1fbf608fceabb66443" style="width: 100.0%; height: 100.0%;">Itaú - Ag. 0024 - Barueri SP</div>`)[0];
+                popup_44a66fdc7976cdb0435371f0f56f5923.setContent(html_56f505370f5e0a1fbf608fceabb66443);
+            
+        
+
+        marker_5c2f32117b95e859d5991f36c922a341.bindPopup(popup_44a66fdc7976cdb0435371f0f56f5923)
+        ;
+
+        
+    
+    
+                marker_5c2f32117b95e859d5991f36c922a341.setIcon(icon_ffcb569d7a326dbc2abc572cb9a7ae0a);
+            
+    
+            var marker_b7d64ec75094b136073fbc3db4266ec2 = L.marker(
+                [-23.5115387, -46.87678380000001],
+                {
+}
+            ).addTo(feature_group_bbcf474fdd6b98628ecf4a086f20338d);
+        
+    
+            var icon_a4d3f0a3eac25f991874072aad613e19 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "briefcase",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a7c101cecbb99be7f2f48ae43c2972ec = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3c70d1b825790de305b5884f3dc7ebe9 = $(`<div id="html_3c70d1b825790de305b5884f3dc7ebe9" style="width: 100.0%; height: 100.0%;">Secretaria da Comunicação</div>`)[0];
+                popup_a7c101cecbb99be7f2f48ae43c2972ec.setContent(html_3c70d1b825790de305b5884f3dc7ebe9);
+            
+        
+
+        marker_b7d64ec75094b136073fbc3db4266ec2.bindPopup(popup_a7c101cecbb99be7f2f48ae43c2972ec)
+        ;
+
+        
+    
+    
+                marker_b7d64ec75094b136073fbc3db4266ec2.setIcon(icon_a4d3f0a3eac25f991874072aad613e19);
+            
+    
+            var marker_8542793c65466be2e77cd6e5ae2c5faa = L.marker(
+                [-23.4664264, -46.93160289999999],
+                {
+}
+            ).addTo(feature_group_bbcf474fdd6b98628ecf4a086f20338d);
+        
+    
+            var icon_757fbc0c69682efed032d436db3b1040 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "briefcase",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9a0025b17a38c3922a26c12548337fa8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_31fc5bdf9d568c811d70924eaa2b78ef = $(`<div id="html_31fc5bdf9d568c811d70924eaa2b78ef" style="width: 100.0%; height: 100.0%;">Prefeitura Municipal de Santana de Parnaíba</div>`)[0];
+                popup_9a0025b17a38c3922a26c12548337fa8.setContent(html_31fc5bdf9d568c811d70924eaa2b78ef);
+            
+        
+
+        marker_8542793c65466be2e77cd6e5ae2c5faa.bindPopup(popup_9a0025b17a38c3922a26c12548337fa8)
+        ;
+
+        
+    
+    
+                marker_8542793c65466be2e77cd6e5ae2c5faa.setIcon(icon_757fbc0c69682efed032d436db3b1040);
+            
+    
+            var marker_15be36034e36d37fc5d4b9fbbb311e6c = L.marker(
+                [-23.4897849, -46.9551802],
+                {
+}
+            ).addTo(feature_group_bbcf474fdd6b98628ecf4a086f20338d);
+        
+    
+            var icon_86dd96838ac1cc378ffbfd8b042c8a11 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "briefcase",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f13eff040f6d0ec3a351f7978b8ef00a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6d254b008000abd05f643a6dd13bf019 = $(`<div id="html_6d254b008000abd05f643a6dd13bf019" style="width: 100.0%; height: 100.0%;">ALD.DA SERRA-UBARUER .</div>`)[0];
+                popup_f13eff040f6d0ec3a351f7978b8ef00a.setContent(html_6d254b008000abd05f643a6dd13bf019);
+            
+        
+
+        marker_15be36034e36d37fc5d4b9fbbb311e6c.bindPopup(popup_f13eff040f6d0ec3a351f7978b8ef00a)
+        ;
+
+        
+    
+    
+                marker_15be36034e36d37fc5d4b9fbbb311e6c.setIcon(icon_86dd96838ac1cc378ffbfd8b042c8a11);
+            
+    
+            var marker_55ea6cba23afa5a0d3d3bbfa622b0e4c = L.marker(
+                [-23.44561530000001, -46.9239204],
+                {
+}
+            ).addTo(feature_group_bbcf474fdd6b98628ecf4a086f20338d);
+        
+    
+            var icon_739d1f123e0d901abb0c3c78c4dfc08a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "briefcase",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a27af69d956d8a88ce3153542f8e7a73 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_32a6158431571bb6c4533e09f9b5d99a = $(`<div id="html_32a6158431571bb6c4533e09f9b5d99a" style="width: 100.0%; height: 100.0%;">SMS - CAPSI - CAPS Centro de Apoio Psicossocial Infantil</div>`)[0];
+                popup_a27af69d956d8a88ce3153542f8e7a73.setContent(html_32a6158431571bb6c4533e09f9b5d99a);
+            
+        
+
+        marker_55ea6cba23afa5a0d3d3bbfa622b0e4c.bindPopup(popup_a27af69d956d8a88ce3153542f8e7a73)
+        ;
+
+        
+    
+    
+                marker_55ea6cba23afa5a0d3d3bbfa622b0e4c.setIcon(icon_739d1f123e0d901abb0c3c78c4dfc08a);
+            
+    
+            var marker_c62836d61caf629a879fc362d1972d19 = L.marker(
+                [-23.4986231, -46.890168],
+                {
+}
+            ).addTo(feature_group_bbcf474fdd6b98628ecf4a086f20338d);
+        
+    
+            var icon_c7398677c3acd57888749acff6ab7f24 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "briefcase",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_da9fb7bfc22c7b2e536ce6a3341af78d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ae46f3173c31e5ade5d4045552fdd45d = $(`<div id="html_ae46f3173c31e5ade5d4045552fdd45d" style="width: 100.0%; height: 100.0%;">Prefeitura Municipal Barueri</div>`)[0];
+                popup_da9fb7bfc22c7b2e536ce6a3341af78d.setContent(html_ae46f3173c31e5ade5d4045552fdd45d);
+            
+        
+
+        marker_c62836d61caf629a879fc362d1972d19.bindPopup(popup_da9fb7bfc22c7b2e536ce6a3341af78d)
+        ;
+
+        
+    
+    
+                marker_c62836d61caf629a879fc362d1972d19.setIcon(icon_c7398677c3acd57888749acff6ab7f24);
+            
+    
+            var feature_group_026029e6e9a65bb310df6875d4905221 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_0b20ed381cb80a1bdf82d5b8a5eaed12 = L.marker(
+                [-23.4859619, -46.836254],
+                {
+}
+            ).addTo(feature_group_026029e6e9a65bb310df6875d4905221);
+        
+    
+            var icon_bbc086a31950ad2dfda76e6fcbd0431d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "graduation-cap",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_57eb1d364e739000e9d913f0bb4ab843 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_6bb9e63e9c2b7b3f6222fc22446e3ec0 = $(`<div id="html_6bb9e63e9c2b7b3f6222fc22446e3ec0" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; width:300px;'><div style='background:#c82333; color:white; padding:10px; font-weight:bold;'>Unidade</div><div style='padding:15px;'><div style='line-height:1.4; font-size:12px;'>🛡️ INTERCEPTAÇÃO COMPETITIVA:<br> • Perfil: Particular<br> • Recomendação: Interceptar fluxo para o concorrente Universidade Presbiteriana Mackenzie – Campus Alphaville.<br><br><b>📊</b> <b>AUDIÊNCIA E PERFIL DE PÚBLICO</b> (Análise Estatística Parametrizada):<br> • Fluxo Estimado: ~79.363 impactos (Via Coletora)<br> • <b>Perfil Demográfico:</b> Classe B (<b>Poder de Compra:</b> R$ 19.419,77)<br><br><b>🏙️</b> <b>POLOS GERADORES DE FLUXO NO ENTORNO</b> (Raio 2km):<br> • Escola Morumbi Alphaville (1.6km)<br><br>TELAS PARA COBERTURA:<br> • HELLOO02 (1.8km), HELLOO02 (1.8km), HELLOO02 (1.8km), HELLOO02 (1.9km), MIDIEXPHA02 (2.2km), MIDIEXPHA05 (2.2km), MIDIEXPHA02 (2.2km), MIDIEXPHA05 (2.2km)</div></div></div></div>`)[0];
+                popup_57eb1d364e739000e9d913f0bb4ab843.setContent(html_6bb9e63e9c2b7b3f6222fc22446e3ec0);
+            
+        
+
+        marker_0b20ed381cb80a1bdf82d5b8a5eaed12.bindPopup(popup_57eb1d364e739000e9d913f0bb4ab843)
+        ;
+
+        
+    
+    
+                marker_0b20ed381cb80a1bdf82d5b8a5eaed12.setIcon(icon_bbc086a31950ad2dfda76e6fcbd0431d);
+            
+    
+            var marker_fd741a81e3d7951bee5f4ea84892cb21 = L.marker(
+                [-23.5080156, -46.86704],
+                {
+}
+            ).addTo(feature_group_026029e6e9a65bb310df6875d4905221);
+        
+    
+            var icon_ccb5b15ae5755ec04683212cedb1dc3a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "graduation-cap",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_eb9f36ea7553cd87e08581b8bc327be2 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_6f4755bdaf882e41d93fa4f76769b247 = $(`<div id="html_6f4755bdaf882e41d93fa4f76769b247" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; width:300px;'><div style='background:#c82333; color:white; padding:10px; font-weight:bold;'>Unidade</div><div style='padding:15px;'><div style='line-height:1.4; font-size:12px;'>🛡️ INTERCEPTAÇÃO COMPETITIVA:<br> • Perfil: Particular<br> • Recomendação: Interceptar fluxo para o concorrente FATEC Barueri – Padre Danilo José de Oliveira Ohl.<br><br><b>📊</b> <b>AUDIÊNCIA E PERFIL DE PÚBLICO</b> (Análise Estatística Parametrizada):<br> • Fluxo Estimado: ~82.557 impactos (Via Coletora)<br> • <b>Perfil Demográfico:</b> Classe C (<b>Poder de Compra:</b> R$ 4.934,74)<br><br><b>🏙️</b> <b>POLOS GERADORES DE FLUXO NO ENTORNO</b> (Raio 2km):<br> • Câmara Municipal de Barueri (0.2km), Pronto-Socorro e Maternidade Nair Fonseca Leitão Arantes (0.6km), Itaú - Ag. 0024 - Barueri SP (0.8km), Barueri (Barueri) (1.0km), Terminal Rodoferroviário Gualberto Tolaine (Barueri) (1.0km)<br><br>TELAS PARA COBERTURA:<br> • MIDIEXPHA01 (0.7km), MIDIEXPHA01 (0.7km), MIDIEXPHA01 (0.7km), MIDIEXPHA01 (0.7km), MIDIEXPHA01 (0.7km), MIDIEXPHA01 (0.7km), MIDIEXPHA01 (0.7km), MIDIEXPHA01 (0.7km)</div></div></div></div>`)[0];
+                popup_eb9f36ea7553cd87e08581b8bc327be2.setContent(html_6f4755bdaf882e41d93fa4f76769b247);
+            
+        
+
+        marker_fd741a81e3d7951bee5f4ea84892cb21.bindPopup(popup_eb9f36ea7553cd87e08581b8bc327be2)
+        ;
+
+        
+    
+    
+                marker_fd741a81e3d7951bee5f4ea84892cb21.setIcon(icon_ccb5b15ae5755ec04683212cedb1dc3a);
+            
+    
+            var marker_482ca896fec20b84934562cf4a46639b = L.marker(
+                [-23.4857006, -46.8634325],
+                {
+}
+            ).addTo(feature_group_026029e6e9a65bb310df6875d4905221);
+        
+    
+            var icon_9218d7a263adab946d12ac17f1f4c63f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "graduation-cap",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4a7cdc98496d66198c859605be4d1e52 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_8359f486d0d99047e35200e8f8150384 = $(`<div id="html_8359f486d0d99047e35200e8f8150384" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; width:300px;'><div style='background:#c82333; color:white; padding:10px; font-weight:bold;'>Unidade</div><div style='padding:15px;'><div style='line-height:1.4; font-size:12px;'>🛡️ INTERCEPTAÇÃO COMPETITIVA:<br> • Perfil: Particular<br> • Recomendação: Interceptar fluxo para o concorrente Faculdade Municipal de Barueri (FMB / FIEB).<br><br><b>📊</b> <b>AUDIÊNCIA E PERFIL DE PÚBLICO</b> (Análise Estatística Parametrizada):<br> • Fluxo Estimado: ~67.803 impactos (Via Coletora)<br> • <b>Perfil Demográfico:</b> Classe B (<b>Poder de Compra:</b> R$ 13.982,57)<br><br><b>🏙️</b> <b>POLOS GERADORES DE FLUXO NO ENTORNO</b> (Raio 2km):<br> • Unidade Einstein Alphaville (1.7km)<br><br>TELAS PARA COBERTURA:<br> • MIDIEXALPHA08 (1.8km), MIDIEXALPHA08 (1.8km), MIDIEXPHA01 (2.0km), MIDIEXPHA01 (2.0km), MIDIEXPHA01 (2.0km), MIDIEXPHA01 (2.0km), MIDIEXPHA01 (2.0km), MIDIEXPHA01 (2.0km)</div></div></div></div>`)[0];
+                popup_4a7cdc98496d66198c859605be4d1e52.setContent(html_8359f486d0d99047e35200e8f8150384);
+            
+        
+
+        marker_482ca896fec20b84934562cf4a46639b.bindPopup(popup_4a7cdc98496d66198c859605be4d1e52)
+        ;
+
+        
+    
+    
+                marker_482ca896fec20b84934562cf4a46639b.setIcon(icon_9218d7a263adab946d12ac17f1f4c63f);
+            
+    
+            var marker_aba4c53009d916c22123dca460b2ab48 = L.marker(
+                [-23.511608, -46.8773008],
+                {
+}
+            ).addTo(feature_group_026029e6e9a65bb310df6875d4905221);
+        
+    
+            var icon_0480d102f3b6ac98ccdf8da5599e0633 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "graduation-cap",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5ae679cc154cdbc5675626f4cd4d3659 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_52faafe4e3b0fb584ac9fb993606551a = $(`<div id="html_52faafe4e3b0fb584ac9fb993606551a" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; width:300px;'><div style='background:#c82333; color:white; padding:10px; font-weight:bold;'>Unidade</div><div style='padding:15px;'><div style='line-height:1.4; font-size:12px;'>🛡️ INTERCEPTAÇÃO COMPETITIVA:<br> • Perfil: Particular<br> • Recomendação: Interceptar fluxo para o concorrente Anhanguera Educacional – Barueri.<br><br><b>📊</b> <b>AUDIÊNCIA E PERFIL DE PÚBLICO</b> (Análise Estatística Parametrizada):<br> • Fluxo Estimado: ~83.229 impactos (Via Coletora)<br> • <b>Perfil Demográfico:</b> Classe C (<b>Poder de Compra:</b> R$ 3.316,99)<br><br><b>🏙️</b> <b>POLOS GERADORES DE FLUXO NO ENTORNO</b> (Raio 2km):<br> • Secretaria da Comunicação (0.1km), Terminal Rodoferroviário Gualberto Tolaine (Barueri) (0.2km), Barueri (Barueri) (0.2km), Itaú - Ag. 0024 - Barueri SP (0.3km), Pronto-Socorro e Maternidade Nair Fonseca Leitão Arantes (0.5km)<br><br>TELAS PARA COBERTURA:<br> • MIDIEXPHA01 (1.8km), MIDIEXPHA01 (1.8km), MIDIEXPHA01 (1.8km), MIDIEXPHA01 (1.8km), MIDIEXPHA01 (1.8km), MIDIEXPHA01 (1.8km), MIDIEXPHA01 (1.8km), MIDIEXPHA01 (1.8km)</div></div></div></div>`)[0];
+                popup_5ae679cc154cdbc5675626f4cd4d3659.setContent(html_52faafe4e3b0fb584ac9fb993606551a);
+            
+        
+
+        marker_aba4c53009d916c22123dca460b2ab48.bindPopup(popup_5ae679cc154cdbc5675626f4cd4d3659)
+        ;
+
+        
+    
+    
+                marker_aba4c53009d916c22123dca460b2ab48.setIcon(icon_0480d102f3b6ac98ccdf8da5599e0633);
+            
+    
+            var marker_c9893eab55709ac78f01ead4627bdf5f = L.marker(
+                [-23.4639078, -46.8735843],
+                {
+}
+            ).addTo(feature_group_026029e6e9a65bb310df6875d4905221);
+        
+    
+            var icon_4f6ebcfeaf12330c9c762755d98e6fe6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "graduation-cap",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5b3607e67c675a62865498536d2eb5cd = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_e5d8dc3da85292139ccc1c86ee11f632 = $(`<div id="html_e5d8dc3da85292139ccc1c86ee11f632" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; width:300px;'><div style='background:#c82333; color:white; padding:10px; font-weight:bold;'>Unidade</div><div style='padding:15px;'><div style='line-height:1.4; font-size:12px;'>🛡️ INTERCEPTAÇÃO COMPETITIVA:<br> • Perfil: Particular<br> • Recomendação: Interceptar fluxo para o concorrente UNINOVE – Polo Alphaville.<br><br><b>📊</b> <b>AUDIÊNCIA E PERFIL DE PÚBLICO</b> (Análise Estatística Parametrizada):<br> • Fluxo Estimado: ~154.663 impactos (Via de Fluxo Local/Comercial)<br> • <b>Perfil Demográfico:</b> Classe B (<b>Poder de Compra:</b> R$ 19.520,59)<br><br><b>🏙️</b> <b>POLOS GERADORES DE FLUXO NO ENTORNO</b> (Raio 2km):<br> • UNIP - Alphaville (0.6km)<br><br>TELAS PARA COBERTURA:<br> • MIDIEXALPHA08 (3.3km), MIDIEXALPHA08 (3.3km), MIDIEXPHA01 (4.6km), MIDIEXPHA01 (4.6km), MIDIEXPHA01 (4.6km), MIDIEXPHA01 (4.6km), MIDIEXPHA01 (4.6km), MIDIEXPHA01 (4.6km)</div></div></div></div>`)[0];
+                popup_5b3607e67c675a62865498536d2eb5cd.setContent(html_e5d8dc3da85292139ccc1c86ee11f632);
+            
+        
+
+        marker_c9893eab55709ac78f01ead4627bdf5f.bindPopup(popup_5b3607e67c675a62865498536d2eb5cd)
+        ;
+
+        
+    
+    
+                marker_c9893eab55709ac78f01ead4627bdf5f.setIcon(icon_4f6ebcfeaf12330c9c762755d98e6fe6);
+            
+    
+            var marker_11ae4406a6481bf9a66ea178562dfcd2 = L.marker(
+                [-23.4637237, -46.9534102],
+                {
+}
+            ).addTo(feature_group_026029e6e9a65bb310df6875d4905221);
+        
+    
+            var icon_c11b866ca5ba30a7f6fccc97fd126ad7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "graduation-cap",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e0cbe8b5b90e6e5a421f3c299ec7adfe = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_dbf4f2eadffd2916763067a49994743a = $(`<div id="html_dbf4f2eadffd2916763067a49994743a" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; width:300px;'><div style='background:#c82333; color:white; padding:10px; font-weight:bold;'>Unidade</div><div style='padding:15px;'><div style='line-height:1.4; font-size:12px;'>🛡️ INTERCEPTAÇÃO COMPETITIVA:<br> • Perfil: Particular<br> • Recomendação: Interceptar fluxo para o concorrente EAD UniCesumar - Barueri.<br><br><b>📊</b> <b>AUDIÊNCIA E PERFIL DE PÚBLICO</b> (Análise Estatística Parametrizada):<br> • Fluxo Estimado: ~47.685 impactos (Via Coletora)<br> • <b>Perfil Demográfico:</b> Classe D/E (<b>Poder de Compra:</b> R$ 2.117,81)</div></div></div></div>`)[0];
+                popup_e0cbe8b5b90e6e5a421f3c299ec7adfe.setContent(html_dbf4f2eadffd2916763067a49994743a);
+            
+        
+
+        marker_11ae4406a6481bf9a66ea178562dfcd2.bindPopup(popup_e0cbe8b5b90e6e5a421f3c299ec7adfe)
+        ;
+
+        
+    
+    
+                marker_11ae4406a6481bf9a66ea178562dfcd2.setIcon(icon_c11b866ca5ba30a7f6fccc97fd126ad7);
+            
+    
+            feature_group_026029e6e9a65bb310df6875d4905221.addTo(map_34327e831b0698c25756a69eeaa4dcb6);
+        
+    
+            var feature_group_fdd0ca8439ab6e06f8cbfed400e4c153 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_2c72580978b8908a63f76afe3c2648bd = L.marker(
+                [-23.4677322, -46.8723482],
+                {
+}
+            ).addTo(feature_group_fdd0ca8439ab6e06f8cbfed400e4c153);
+        
+    
+            var icon_8e945aac33e94cbeab1cb8c2103b55dc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkblue",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_abf79edd77f61bf0b6b7beb6cc12cb11 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_0eab8927e037bc3c20543e97465be6c4 = $(`<div id="html_0eab8927e037bc3c20543e97465be6c4" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; width:300px;'><div style='background:#003366; color:white; padding:10px; font-weight:bold;'>Unidade</div><div style='padding:15px;'><div style='line-height:1.4; font-size:12px;'>🎯 ESTRATÉGIA DE DEFESA:<br> • Perfil: Particular<br> • Recomendação: Blindar acessos à unidade UNIP Alphaville.<br><br><b>📊</b> <b>AUDIÊNCIA E PERFIL DE PÚBLICO</b> (Análise Estatística Parametrizada):<br> • Fluxo Estimado: ~78.227 impactos (Via Coletora)<br> • <b>Perfil Demográfico:</b> Classe B (<b>Poder de Compra:</b> R$ 18.284,93)<br><br><b>🏙️</b> <b>POLOS GERADORES DE FLUXO NO ENTORNO</b> (Raio 2km):<br> • UNIP - Alphaville (0.2km)<br><br>TELAS PARA COBERTURA:<br> • MIDIEXALPHA08 (2.9km), MIDIEXALPHA08 (2.9km), MIDIEXPHA01 (4.1km), MIDIEXPHA01 (4.1km), MIDIEXPHA01 (4.1km), MIDIEXPHA01 (4.1km), MIDIEXPHA01 (4.1km), MIDIEXPHA01 (4.1km)</div></div></div></div>`)[0];
+                popup_abf79edd77f61bf0b6b7beb6cc12cb11.setContent(html_0eab8927e037bc3c20543e97465be6c4);
+            
+        
+
+        marker_2c72580978b8908a63f76afe3c2648bd.bindPopup(popup_abf79edd77f61bf0b6b7beb6cc12cb11)
+        ;
+
+        
+    
+    
+                marker_2c72580978b8908a63f76afe3c2648bd.setIcon(icon_8e945aac33e94cbeab1cb8c2103b55dc);
+            
+    
+            feature_group_fdd0ca8439ab6e06f8cbfed400e4c153.addTo(map_34327e831b0698c25756a69eeaa4dcb6);
+        
+    
+            var feature_group_e57ad6f480babb6c4b90399e3de8d4f3 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_cluster_a43093fa92317136140d07f9ec46ad2d = L.markerClusterGroup(
+                {
+}
+            );
+        
+    
+            var marker_bbfa252d5b2bf2a5e43dcf32d3281b56 = L.marker(
+                [-23.507198, -46.833112],
+                {
+}
+            ).addTo(marker_cluster_a43093fa92317136140d07f9ec46ad2d);
+        
+    
+            var icon_eb12fabb1ea0a4f844a5818d2a5893a3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "eye",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0c2ffe563d0cd0cff037a992a8d4e66a = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_59f17c823df8b42dcbe31c1d40ac9ab0 = $(`<div id="html_59f17c823df8b42dcbe31c1d40ac9ab0" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; width:300px;'><div style='background:#28a745; color:white; padding:10px; font-weight:bold; display:flex; justify-content:space-between;'><span>HELLOO01</span><span>PAINEL DIGITAL</span></div><div style='padding:15px; max-height:400px; overflow-y:auto;'><div style='background:#fcfcfc; padding:8px; border:1px solid #eee; border-radius:4px; margin-bottom:10px; font-size:11px;'>Rodovia Castelo Branco Fte Shop Tamboré</div><div style='line-height:1.4; font-size:12px;'><b>📊</b> <b>AUDIÊNCIA E PERFIL DE PÚBLICO</b> (Análise Estatística Parametrizada):<br> • Fluxo Estimado: ~359.055 impactos (Eixo Rodoviário)<br> • <b>Perfil Demográfico:</b> Classe C (<b>Poder de Compra:</b> R$ 6.738,82)<br><br><b>🏙️</b> <b>POLOS GERADORES DE FLUXO NO ENTORNO</b> (Raio 2km):<br> • Clínica Vascular Bessa (1.1km), Unidade Estácio (1.3km)<br><br><b>📍</b> INTERCEPTAÇÃO DE FLUXO COMPETITIVO (Raio 5km):<br> • Universidade Presbiteriana Mackenzie – Campus Alphaville (2.4km), FATEC Barueri – Padre Danilo José de Oliveira Ohl (3.5km), Faculdade Municipal de Barueri (FMB / FIEB) (3.9km), Anhanguera Educacional – Barueri (4.5km)</div></div></div></div>`)[0];
+                popup_0c2ffe563d0cd0cff037a992a8d4e66a.setContent(html_59f17c823df8b42dcbe31c1d40ac9ab0);
+            
+        
+
+        marker_bbfa252d5b2bf2a5e43dcf32d3281b56.bindPopup(popup_0c2ffe563d0cd0cff037a992a8d4e66a)
+        ;
+
+        
+    
+    
+                marker_bbfa252d5b2bf2a5e43dcf32d3281b56.setIcon(icon_eb12fabb1ea0a4f844a5818d2a5893a3);
+            
+    
+            var marker_d21d19989fc9b7bcb87710c9aea4ba85 = L.marker(
+                [-23.50244, -46.833112],
+                {
+}
+            ).addTo(marker_cluster_a43093fa92317136140d07f9ec46ad2d);
+        
+    
+            var icon_5528a8bba35d7543ef69db48fb0d08b5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "eye",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f4a69e09482ef5c6fec5cf61b6b7c570 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_6afd7060d7001086ab1882df3146d11f = $(`<div id="html_6afd7060d7001086ab1882df3146d11f" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; width:300px;'><div style='background:#28a745; color:white; padding:10px; font-weight:bold; display:flex; justify-content:space-between;'><span>HELLOO02</span><span>PAINEL DIGITAL</span></div><div style='padding:15px; max-height:400px; overflow-y:auto;'><div style='background:#fcfcfc; padding:8px; border:1px solid #eee; border-radius:4px; margin-bottom:10px; font-size:11px;'>Alamade Araguaia</div><div style='line-height:1.4; font-size:12px;'><b>📊</b> <b>AUDIÊNCIA E PERFIL DE PÚBLICO</b> (Análise Estatística Parametrizada):<br> • Fluxo Estimado: ~268.963 impactos (Via de Fluxo Local/Comercial)<br> • <b>Perfil Demográfico:</b> Classe B (<b>Poder de Compra:</b> R$ 11.120,06)<br><br><b>🏙️</b> <b>POLOS GERADORES DE FLUXO NO ENTORNO</b> (Raio 2km):<br> • Clínica Vascular Bessa (0.9km)<br><br><b>📍</b> INTERCEPTAÇÃO DE FLUXO COMPETITIVO (Raio 5km):<br> • Universidade Presbiteriana Mackenzie – Campus Alphaville (1.9km), FATEC Barueri – Padre Danilo José de Oliveira Ohl (3.5km), Faculdade Municipal de Barueri (FMB / FIEB) (3.6km), Anhanguera Educacional – Barueri (4.6km)</div></div></div></div>`)[0];
+                popup_f4a69e09482ef5c6fec5cf61b6b7c570.setContent(html_6afd7060d7001086ab1882df3146d11f);
+            
+        
+
+        marker_d21d19989fc9b7bcb87710c9aea4ba85.bindPopup(popup_f4a69e09482ef5c6fec5cf61b6b7c570)
+        ;
+
+        
+    
+    
+                marker_d21d19989fc9b7bcb87710c9aea4ba85.setIcon(icon_5528a8bba35d7543ef69db48fb0d08b5);
+            
+    
+            var marker_01d02b1487aef0151c3b563d13972b87 = L.marker(
+                [-23.5090431, -46.811389],
+                {
+}
+            ).addTo(marker_cluster_a43093fa92317136140d07f9ec46ad2d);
+        
+    
+            var icon_269b6fa9ddc676e92c70f7d20c08500d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "eye",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_215e37b1507c6cb70970df6fad622f3e = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_8a050a818b858aadb9483fc8cd389dba = $(`<div id="html_8a050a818b858aadb9483fc8cd389dba" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; width:300px;'><div style='background:#28a745; color:white; padding:10px; font-weight:bold; display:flex; justify-content:space-between;'><span>MIDIEXALPHA06</span><span>OUTDOOR</span></div><div style='padding:15px; max-height:400px; overflow-y:auto;'><div style='background:#fcfcfc; padding:8px; border:1px solid #eee; border-radius:4px; margin-bottom:10px; font-size:11px;'>AV PETROBRAS ALPHAVILLE INDUSTRIAL ALPHAVILLE BARUERI SP</div><div style='line-height:1.4; font-size:12px;'><b>📊</b> <b>AUDIÊNCIA E PERFIL DE PÚBLICO</b> (Análise Estatística Parametrizada):<br> • Fluxo Estimado: ~181.826 impactos (Via Arterial Urbana)<br> • <b>Perfil Demográfico:</b> Classe D/E (<b>Poder de Compra:</b> R$ 2.804,88)<br><br><b>📍</b> INTERCEPTAÇÃO DE FLUXO COMPETITIVO (Raio 5km):<br> • Universidade Presbiteriana Mackenzie – Campus Alphaville (3.6km)</div></div></div></div>`)[0];
+                popup_215e37b1507c6cb70970df6fad622f3e.setContent(html_8a050a818b858aadb9483fc8cd389dba);
+            
+        
+
+        marker_01d02b1487aef0151c3b563d13972b87.bindPopup(popup_215e37b1507c6cb70970df6fad622f3e)
+        ;
+
+        
+    
+    
+                marker_01d02b1487aef0151c3b563d13972b87.setIcon(icon_269b6fa9ddc676e92c70f7d20c08500d);
+            
+    
+            var marker_ed876354a861be73efb7795f1765c3a5 = L.marker(
+                [-23.5174029, -46.8570836],
+                {
+}
+            ).addTo(marker_cluster_a43093fa92317136140d07f9ec46ad2d);
+        
+    
+            var icon_89ec675a49baac98330cc9e36e6110aa = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "eye",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a83f91d5504c1737d1bc69c5723c7262 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_b1168df1a4e66e415e79470658de5c89 = $(`<div id="html_b1168df1a4e66e415e79470658de5c89" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; width:300px;'><div style='background:#28a745; color:white; padding:10px; font-weight:bold; display:flex; justify-content:space-between;'><span>MIDIEXALPHA07</span><span>OUTDOOR</span></div><div style='padding:15px; max-height:400px; overflow-y:auto;'><div style='background:#fcfcfc; padding:8px; border:1px solid #eee; border-radius:4px; margin-bottom:10px; font-size:11px;'>AV PIRAMBOIA 2119 ALPHAVILLE BARUERI</div><div style='line-height:1.4; font-size:12px;'><b>📊</b> <b>AUDIÊNCIA E PERFIL DE PÚBLICO</b> (Análise Estatística Parametrizada):<br> • Fluxo Estimado: ~236.770 impactos (Via Arterial Urbana)<br> • <b>Perfil Demográfico:</b> Classe C (<b>Poder de Compra:</b> R$ 3.159,14)<br><br><b>🏙️</b> <b>POLOS GERADORES DE FLUXO NO ENTORNO</b> (Raio 2km):<br> • Antônio João (Barueri) (0.1km), Câmara Municipal de Barueri (1.2km), Pronto-Socorro e Maternidade Nair Fonseca Leitão Arantes (1.7km), Barueri (Barueri) (1.9km), Terminal Rodoferroviário Gualberto Tolaine (Barueri) (2.0km)<br><br><b>📍</b> INTERCEPTAÇÃO DE FLUXO COMPETITIVO (Raio 5km):<br> • FATEC Barueri – Padre Danilo José de Oliveira Ohl (1.5km), Anhanguera Educacional – Barueri (2.2km), Faculdade Municipal de Barueri (FMB / FIEB) (3.6km), Universidade Presbiteriana Mackenzie – Campus Alphaville (4.1km)</div></div></div></div>`)[0];
+                popup_a83f91d5504c1737d1bc69c5723c7262.setContent(html_b1168df1a4e66e415e79470658de5c89);
+            
+        
+
+        marker_ed876354a861be73efb7795f1765c3a5.bindPopup(popup_a83f91d5504c1737d1bc69c5723c7262)
+        ;
+
+        
+    
+    
+                marker_ed876354a861be73efb7795f1765c3a5.setIcon(icon_89ec675a49baac98330cc9e36e6110aa);
+            
+    
+            var marker_04be529c5d544aeff56b0192cb616c6b = L.marker(
+                [-23.4930936, -46.8792531],
+                {
+}
+            ).addTo(marker_cluster_a43093fa92317136140d07f9ec46ad2d);
+        
+    
+            var icon_2a00c1922d7cd5c59d866a391d81ef02 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "eye",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c8a186e85e28be83cc87b993e4d69946 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_bf15fa8eac6cc3dc462d3ad703b21def = $(`<div id="html_bf15fa8eac6cc3dc462d3ad703b21def" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; width:300px;'><div style='background:#28a745; color:white; padding:10px; font-weight:bold; display:flex; justify-content:space-between;'><span>MIDIEXALPHA08</span><span>OUTDOOR</span></div><div style='padding:15px; max-height:400px; overflow-y:auto;'><div style='background:#fcfcfc; padding:8px; border:1px solid #eee; border-radius:4px; margin-bottom:10px; font-size:11px;'>Estrada dos Romeiros – Sentido Alphaville – Barueri – SP</div><div style='line-height:1.4; font-size:12px;'><b>📊</b> <b>AUDIÊNCIA E PERFIL DE PÚBLICO</b> (Análise Estatística Parametrizada):<br> • Fluxo Estimado: ~51.870 impactos (Via Coletora)<br> • <b>Perfil Demográfico:</b> Classe C (<b>Poder de Compra:</b> R$ 3.759,36)<br><br><b>🏙️</b> <b>POLOS GERADORES DE FLUXO NO ENTORNO</b> (Raio 2km):<br> • Hospitalis Núcleo Hospitalar Barueri (1.1km), Prefeitura Municipal Barueri (1.3km)<br><br><b>📍</b> INTERCEPTAÇÃO DE FLUXO COMPETITIVO (Raio 5km):<br> • Faculdade Municipal de Barueri (FMB / FIEB) (1.8km), FATEC Barueri – Padre Danilo José de Oliveira Ohl (2.1km), Anhanguera Educacional – Barueri (2.1km), UNIP Alphaville (2.9km), UNINOVE – Polo Alphaville (3.3km), Universidade Presbiteriana Mackenzie – Campus Alphaville (4.5km)</div></div></div></div>`)[0];
+                popup_c8a186e85e28be83cc87b993e4d69946.setContent(html_bf15fa8eac6cc3dc462d3ad703b21def);
+            
+        
+
+        marker_04be529c5d544aeff56b0192cb616c6b.bindPopup(popup_c8a186e85e28be83cc87b993e4d69946)
+        ;
+
+        
+    
+    
+                marker_04be529c5d544aeff56b0192cb616c6b.setIcon(icon_2a00c1922d7cd5c59d866a391d81ef02);
+            
+    
+            var marker_3377b5a60eea006bc523787e25a12ff1 = L.marker(
+                [-23.5189049, -46.8571711],
+                {
+}
+            ).addTo(marker_cluster_a43093fa92317136140d07f9ec46ad2d);
+        
+    
+            var icon_27f927293accd577ced57be22547ce90 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "eye",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9802f2c7c467da9c60a1bf9bd601a07a = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_4fb678c4030eeef14771df1e0523c253 = $(`<div id="html_4fb678c4030eeef14771df1e0523c253" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; width:300px;'><div style='background:#28a745; color:white; padding:10px; font-weight:bold; display:flex; justify-content:space-between;'><span>MIDIEXALPHA09</span><span>OUTDOOR</span></div><div style='padding:15px; max-height:400px; overflow-y:auto;'><div style='background:#fcfcfc; padding:8px; border:1px solid #eee; border-radius:4px; margin-bottom:10px; font-size:11px;'>Via Mal. Rondon – Entrada Shopping Barueri – Divisa Barueri x Carapicuíba – SP</div><div style='line-height:1.4; font-size:12px;'><b>📊</b> <b>AUDIÊNCIA E PERFIL DE PÚBLICO</b> (Análise Estatística Parametrizada):<br> • Fluxo Estimado: ~372.272 impactos (Eixo Rodoviário)<br> • <b>Perfil Demográfico:</b> Classe C (<b>Poder de Compra:</b> R$ 3.043,44)<br><br><b>🏙️</b> <b>POLOS GERADORES DE FLUXO NO ENTORNO</b> (Raio 2km):<br> • Antônio João (Barueri) (0.2km), Câmara Municipal de Barueri (1.3km), Barueri (Barueri) (2.0km)<br><br><b>📍</b> INTERCEPTAÇÃO DE FLUXO COMPETITIVO (Raio 5km):<br> • FATEC Barueri – Padre Danilo José de Oliveira Ohl (1.6km), Anhanguera Educacional – Barueri (2.2km), Faculdade Municipal de Barueri (FMB / FIEB) (3.7km), Universidade Presbiteriana Mackenzie – Campus Alphaville (4.2km)</div></div></div></div>`)[0];
+                popup_9802f2c7c467da9c60a1bf9bd601a07a.setContent(html_4fb678c4030eeef14771df1e0523c253);
+            
+        
+
+        marker_3377b5a60eea006bc523787e25a12ff1.bindPopup(popup_9802f2c7c467da9c60a1bf9bd601a07a)
+        ;
+
+        
+    
+    
+                marker_3377b5a60eea006bc523787e25a12ff1.setIcon(icon_27f927293accd577ced57be22547ce90);
+            
+    
+            var marker_c30fd74b85e5621a36ab8a340abef2ac = L.marker(
+                [-23.5036698, -46.8614512],
+                {
+}
+            ).addTo(marker_cluster_a43093fa92317136140d07f9ec46ad2d);
+        
+    
+            var icon_b39e18128226dcee72c1c83038b3dc04 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "eye",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e37cebeacd7edb7f3707f4e5f5de4c79 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_c15e1c9e073dfa5bdb5c3594dfc1710e = $(`<div id="html_c15e1c9e073dfa5bdb5c3594dfc1710e" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; width:300px;'><div style='background:#28a745; color:white; padding:10px; font-weight:bold; display:flex; justify-content:space-between;'><span>MIDIEXPHA01</span><span>OUTDOOR</span></div><div style='padding:15px; max-height:400px; overflow-y:auto;'><div style='background:#fcfcfc; padding:8px; border:1px solid #eee; border-radius:4px; margin-bottom:10px; font-size:11px;'>PONTE M ARANTES x ALAMEDA TOCANTINS ALPHAVILLE BARUERI SP</div><div style='line-height:1.4; font-size:12px;'><b>📊</b> <b>AUDIÊNCIA E PERFIL DE PÚBLICO</b> (Análise Estatística Parametrizada):<br> • Fluxo Estimado: ~310.049 impactos (Via Arterial Urbana)<br> • <b>Perfil Demográfico:</b> Classe B (<b>Poder de Compra:</b> R$ 7.872,14)<br><br><b>🏙️</b> <b>POLOS GERADORES DE FLUXO NO ENTORNO</b> (Raio 2km):<br> • Unidade Einstein Alphaville (0.5km), Câmara Municipal de Barueri (0.8km), Antônio João (Barueri) (1.5km), Itaú - Ag. 0024 - Barueri SP (1.5km), Barueri (Barueri) (1.7km)<br><br><b>📍</b> INTERCEPTAÇÃO DE FLUXO COMPETITIVO (Raio 5km):<br> • FATEC Barueri – Padre Danilo José de Oliveira Ohl (0.7km), Anhanguera Educacional – Barueri (1.8km), Faculdade Municipal de Barueri (FMB / FIEB) (2.0km), Universidade Presbiteriana Mackenzie – Campus Alphaville (3.2km), UNIP Alphaville (4.1km), UNINOVE – Polo Alphaville (4.6km)</div></div></div></div>`)[0];
+                popup_e37cebeacd7edb7f3707f4e5f5de4c79.setContent(html_c15e1c9e073dfa5bdb5c3594dfc1710e);
+            
+        
+
+        marker_c30fd74b85e5621a36ab8a340abef2ac.bindPopup(popup_e37cebeacd7edb7f3707f4e5f5de4c79)
+        ;
+
+        
+    
+    
+                marker_c30fd74b85e5621a36ab8a340abef2ac.setIcon(icon_b39e18128226dcee72c1c83038b3dc04);
+            
+    
+            var marker_76ddb8cba518d22be21d7964f7b41207 = L.marker(
+                [-23.5054597, -46.8322174],
+                {
+}
+            ).addTo(marker_cluster_a43093fa92317136140d07f9ec46ad2d);
+        
+    
+            var icon_97d0502488c9366a64bde6d12cde4b0b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "eye",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a05f6bbe7b18b07073e00201a1c1ce18 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_ce0562f068347df0a3b7c81cfbd7ff4b = $(`<div id="html_ce0562f068347df0a3b7c81cfbd7ff4b" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; width:300px;'><div style='background:#28a745; color:white; padding:10px; font-weight:bold; display:flex; justify-content:space-between;'><span>MIDIEXPHA02</span><span>OUTDOOR</span></div><div style='padding:15px; max-height:400px; overflow-y:auto;'><div style='background:#fcfcfc; padding:8px; border:1px solid #eee; border-radius:4px; margin-bottom:10px; font-size:11px;'>Av. Piracema, Entrada de Alphaville (em frente ao Shopping Tamboré)</div><div style='line-height:1.4; font-size:12px;'><b>📊</b> <b>AUDIÊNCIA E PERFIL DE PÚBLICO</b> (Análise Estatística Parametrizada):<br> • Fluxo Estimado: ~246.444 impactos (Via Arterial Urbana)<br> • <b>Perfil Demográfico:</b> Classe B (<b>Poder de Compra:</b> R$ 7.526,52)<br><br><b>🏙️</b> <b>POLOS GERADORES DE FLUXO NO ENTORNO</b> (Raio 2km):<br> • Clínica Vascular Bessa (1.1km), Unidade Estácio (1.5km)<br><br><b>📍</b> INTERCEPTAÇÃO DE FLUXO COMPETITIVO (Raio 5km):<br> • Universidade Presbiteriana Mackenzie – Campus Alphaville (2.2km), FATEC Barueri – Padre Danilo José de Oliveira Ohl (3.6km), Faculdade Municipal de Barueri (FMB / FIEB) (3.9km), Anhanguera Educacional – Barueri (4.6km)</div></div></div></div>`)[0];
+                popup_a05f6bbe7b18b07073e00201a1c1ce18.setContent(html_ce0562f068347df0a3b7c81cfbd7ff4b);
+            
+        
+
+        marker_76ddb8cba518d22be21d7964f7b41207.bindPopup(popup_a05f6bbe7b18b07073e00201a1c1ce18)
+        ;
+
+        
+    
+    
+                marker_76ddb8cba518d22be21d7964f7b41207.setIcon(icon_97d0502488c9366a64bde6d12cde4b0b);
+            
+    
+            var marker_2eae07d999b2d560534cc1564ab2e94f = L.marker(
+                [-23.5174029, -46.8570836],
+                {
+}
+            ).addTo(marker_cluster_a43093fa92317136140d07f9ec46ad2d);
+        
+    
+            var icon_a2783a348e03a831d663b40b4f185885 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "eye",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_abfb465c1839207667b68e67f7afd827 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_507289d7b7831ab612d3954963ec7871 = $(`<div id="html_507289d7b7831ab612d3954963ec7871" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; width:300px;'><div style='background:#28a745; color:white; padding:10px; font-weight:bold; display:flex; justify-content:space-between;'><span>MIDIEXPHA03</span><span>OUTDOOR</span></div><div style='padding:15px; max-height:400px; overflow-y:auto;'><div style='background:#fcfcfc; padding:8px; border:1px solid #eee; border-radius:4px; margin-bottom:10px; font-size:11px;'>Av. Divisão Pedro Rodrigues, Entrada Shopping Barueri - SP</div><div style='line-height:1.4; font-size:12px;'><b>📊</b> <b>AUDIÊNCIA E PERFIL DE PÚBLICO</b> (Análise Estatística Parametrizada):<br> • Fluxo Estimado: ~236.770 impactos (Via Arterial Urbana)<br> • <b>Perfil Demográfico:</b> Classe C (<b>Poder de Compra:</b> R$ 3.159,14)<br><br><b>🏙️</b> <b>POLOS GERADORES DE FLUXO NO ENTORNO</b> (Raio 2km):<br> • Antônio João (Barueri) (0.1km), Câmara Municipal de Barueri (1.2km), Pronto-Socorro e Maternidade Nair Fonseca Leitão Arantes (1.7km), Barueri (Barueri) (1.9km), Terminal Rodoferroviário Gualberto Tolaine (Barueri) (2.0km)<br><br><b>📍</b> INTERCEPTAÇÃO DE FLUXO COMPETITIVO (Raio 5km):<br> • FATEC Barueri – Padre Danilo José de Oliveira Ohl (1.5km), Anhanguera Educacional – Barueri (2.2km), Faculdade Municipal de Barueri (FMB / FIEB) (3.6km), Universidade Presbiteriana Mackenzie – Campus Alphaville (4.1km)</div></div></div></div>`)[0];
+                popup_abfb465c1839207667b68e67f7afd827.setContent(html_507289d7b7831ab612d3954963ec7871);
+            
+        
+
+        marker_2eae07d999b2d560534cc1564ab2e94f.bindPopup(popup_abfb465c1839207667b68e67f7afd827)
+        ;
+
+        
+    
+    
+                marker_2eae07d999b2d560534cc1564ab2e94f.setIcon(icon_a2783a348e03a831d663b40b4f185885);
+            
+    
+            var marker_5ed5bb9d020853b77ab26acb85d969a4 = L.marker(
+                [-23.5100274, -46.8100232],
+                {
+}
+            ).addTo(marker_cluster_a43093fa92317136140d07f9ec46ad2d);
+        
+    
+            var icon_a0956d652d0045adb777a57c2badc6a2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "eye",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1097d671c9fba79dbf8cb30ca9c0014b = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_dcfe222b5e38563357c0f5ce3b7e535b = $(`<div id="html_dcfe222b5e38563357c0f5ce3b7e535b" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; width:300px;'><div style='background:#28a745; color:white; padding:10px; font-weight:bold; display:flex; justify-content:space-between;'><span>MIDIEXPHA04</span><span>OUTDOOR</span></div><div style='padding:15px; max-height:400px; overflow-y:auto;'><div style='background:#fcfcfc; padding:8px; border:1px solid #eee; border-radius:4px; margin-bottom:10px; font-size:11px;'>Rodovia Castelo Branco após o Pedágio, Sent. Alphaville Barueri</div><div style='line-height:1.4; font-size:12px;'><b>📊</b> <b>AUDIÊNCIA E PERFIL DE PÚBLICO</b> (Análise Estatística Parametrizada):<br> • Fluxo Estimado: ~289.637 impactos (Eixo Rodoviário)<br> • <b>Perfil Demográfico:</b> Classe D/E (<b>Poder de Compra:</b> R$ 2.849,16)<br><br><b>📍</b> INTERCEPTAÇÃO DE FLUXO COMPETITIVO (Raio 5km):<br> • Universidade Presbiteriana Mackenzie – Campus Alphaville (3.8km)</div></div></div></div>`)[0];
+                popup_1097d671c9fba79dbf8cb30ca9c0014b.setContent(html_dcfe222b5e38563357c0f5ce3b7e535b);
+            
+        
+
+        marker_5ed5bb9d020853b77ab26acb85d969a4.bindPopup(popup_1097d671c9fba79dbf8cb30ca9c0014b)
+        ;
+
+        
+    
+    
+                marker_5ed5bb9d020853b77ab26acb85d969a4.setIcon(icon_a0956d652d0045adb777a57c2badc6a2);
+            
+    
+            var marker_142c78852d5413e9d1bd1de3d2e38178 = L.marker(
+                [-23.5054597, -46.8322174],
+                {
+}
+            ).addTo(marker_cluster_a43093fa92317136140d07f9ec46ad2d);
+        
+    
+            var icon_8e5e0bd12a0b24228ca838c8529e2e50 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "eye",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_407a1393f6626c97e4e482dd855dfeb4 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_b0919fbb4f819b8766f28469f41d492d = $(`<div id="html_b0919fbb4f819b8766f28469f41d492d" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial; width:300px;'><div style='background:#28a745; color:white; padding:10px; font-weight:bold; display:flex; justify-content:space-between;'><span>MIDIEXPHA05</span><span>OUTDOOR</span></div><div style='padding:15px; max-height:400px; overflow-y:auto;'><div style='background:#fcfcfc; padding:8px; border:1px solid #eee; border-radius:4px; margin-bottom:10px; font-size:11px;'>Av. Piracema, Entrada de Alphaville (em frente ao Shopping Tamboré)</div><div style='line-height:1.4; font-size:12px;'><b>📊</b> <b>AUDIÊNCIA E PERFIL DE PÚBLICO</b> (Análise Estatística Parametrizada):<br> • Fluxo Estimado: ~246.444 impactos (Via Arterial Urbana)<br> • <b>Perfil Demográfico:</b> Classe B (<b>Poder de Compra:</b> R$ 7.526,52)<br><br><b>🏙️</b> <b>POLOS GERADORES DE FLUXO NO ENTORNO</b> (Raio 2km):<br> • Clínica Vascular Bessa (1.1km), Unidade Estácio (1.5km)<br><br><b>📍</b> INTERCEPTAÇÃO DE FLUXO COMPETITIVO (Raio 5km):<br> • Universidade Presbiteriana Mackenzie – Campus Alphaville (2.2km), FATEC Barueri – Padre Danilo José de Oliveira Ohl (3.6km), Faculdade Municipal de Barueri (FMB / FIEB) (3.9km), Anhanguera Educacional – Barueri (4.6km)</div></div></div></div>`)[0];
+                popup_407a1393f6626c97e4e482dd855dfeb4.setContent(html_b0919fbb4f819b8766f28469f41d492d);
+            
+        
+
+        marker_142c78852d5413e9d1bd1de3d2e38178.bindPopup(popup_407a1393f6626c97e4e482dd855dfeb4)
+        ;
+
+        
+    
+    
+                marker_142c78852d5413e9d1bd1de3d2e38178.setIcon(icon_8e5e0bd12a0b24228ca838c8529e2e50);
+            
+    
+            marker_cluster_a43093fa92317136140d07f9ec46ad2d.addTo(feature_group_e57ad6f480babb6c4b90399e3de8d4f3);
+        
+    
+            feature_group_e57ad6f480babb6c4b90399e3de8d4f3.addTo(map_34327e831b0698c25756a69eeaa4dcb6);
+        
+    
+            var layer_control_66d4511888ee99dda073a80014911dba_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_2d0f93ad77a6d2409b0ab8487af6004d,
+                },
+                overlays :  {
+                    "\u2b55 Cobertura - 5 Km" : feature_group_4554ca06bb22489247b6f9757dd04d6f,
+                    "\ud83d\udecd\ufe0f Consumo \u0026 Lazer" : feature_group_6324d0897d9a782daf44cb9ca5b1035e,
+                    "\ud83c\udfe5 Sa\u00fade \u0026 Educa\u00e7\u00e3o" : feature_group_f96585ce67f45cdbd264195566b9094d,
+                    "\ud83d\ude8c Terminal / Hub" : feature_group_f6fec076c1993684b86f60fcc7ffcf4e,
+                    "\ud83d\udcbc Servi\u00e7os \u0026 Neg\u00f3cios" : feature_group_bbcf474fdd6b98628ecf4a086f20338d,
+                    "\ud83d\udfe5 Concorr\u00eancia" : feature_group_026029e6e9a65bb310df6875d4905221,
+                    "\u2b50 Cliente Master" : feature_group_fdd0ca8439ab6e06f8cbfed400e4c153,
+                    "\ud83d\udfe9 Invent\u00e1rio (M\u00eddia)" : feature_group_e57ad6f480babb6c4b90399e3de8d4f3,
+                },
+            };
+            let layer_control_66d4511888ee99dda073a80014911dba = L.control.layers(
+                layer_control_66d4511888ee99dda073a80014911dba_layers.base_layers,
+                layer_control_66d4511888ee99dda073a80014911dba_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_34327e831b0698c25756a69eeaa4dcb6);
+
+        
+</script>
+</html>
