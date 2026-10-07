@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Central operacional dos mapas publicados para as campanhas UNIP 2027.1.">
+  <title>Central de Mapas | Planejamento UNIP 2027.1</title>
+  <style>
+    :root {
+      --navy: #043b70;
+      --navy-deep: #032f59;
+      --blue: #0789ce;
+      --blue-soft: #e8f5fc;
+      --red: #ed3344;
+      --orange: #f59e0b;
+      --green: #168a54;
+      --ink: #102d4b;
+      --muted: #60758b;
+      --line: #d6e2ec;
+      --surface: #ffffff;
+      --page: #f2f6fa;
+      --shadow: 0 14px 38px rgba(9, 46, 82, .12);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 90% 0%, rgba(7,137,206,.09), transparent 30rem),
+        var(--page);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100vh;
+    }
+    button, input, select { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .hero {
+      color: white;
+      background:
+        linear-gradient(120deg, rgba(3,47,89,.98), rgba(4,75,128,.96) 58%, rgba(7,137,206,.92)),
+        var(--navy);
+      overflow: hidden;
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 38rem;
+      height: 38rem;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 50%;
+      right: -12rem;
+      top: -24rem;
+      box-shadow: 0 0 0 6rem rgba(255,255,255,.035), 0 0 0 12rem rgba(255,255,255,.02);
+    }
+    .hero-inner, main, footer { width: min(1480px, calc(100% - 48px)); margin: 0 auto; }
+    .hero-inner { padding: 28px 0 54px; position: relative; z-index: 1; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 18px; font-weight: 900; letter-spacing: .02em; }
+    .brand-logo {
+      width: 158px; height: 92px; border-radius: 17px; display: grid; place-items: center;
+      overflow: hidden; padding: 8px 12px 12px; background: white; box-shadow: 0 8px 22px rgba(0,0,0,.18);
+    }
+    .brand-logo img {
+      display: block; width: auto; height: auto; max-width: 122px; max-height: 64px;
+      object-fit: contain; object-position: center;
+    }
+    .brand-divider { width: 1px; height: 45px; background: rgba(255,255,255,.28); }
+    .brand-cycle {
+      max-width: 230px; color: #d7eaf8; font-size: 14px; font-weight: 850;
+      letter-spacing: .14em; line-height: 1.35; text-transform: uppercase;
+    }
+    .status-pill {
+      display: inline-flex; align-items: center; gap: 8px; padding: 9px 13px; border: 1px solid rgba(255,255,255,.26);
+      background: rgba(255,255,255,.11); border-radius: 999px; font-size: 13px; font-weight: 800;
+    }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #70efae; box-shadow: 0 0 0 5px rgba(112,239,174,.13); }
+    .hero-copy { max-width: 890px; margin-top: 58px; }
+    .eyebrow { display: flex; align-items: center; gap: 10px; color: #aee0ff; font-size: 13px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 30px; height: 3px; background: var(--red); border-radius: 3px; }
+    h1 { margin: 14px 0 14px; font-size: clamp(38px, 5vw, 68px); line-height: 1.02; letter-spacing: -.045em; }
+    .hero-copy p { margin: 0; max-width: 760px; color: #d7eaf8; font-size: clamp(16px, 2vw, 20px); line-height: 1.55; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .hero-btn, .tool-btn, .copy-btn, .view-btn {
+      border: 0; border-radius: 12px; cursor: pointer; font-weight: 850; transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+    }
+    .hero-btn:hover, .tool-btn:hover, .copy-btn:hover, .view-btn:hover { transform: translateY(-1px); }
+    .hero-btn { padding: 13px 17px; display: inline-flex; align-items: center; gap: 9px; }
+    .hero-btn.primary { color: var(--navy-deep); background: white; box-shadow: 0 10px 24px rgba(0,0,0,.16); }
+    .hero-btn.secondary { color: white; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.24); }
+    main { padding: 0 0 56px; }
+    .stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; transform: translateY(-24px); position: relative; z-index: 2;
+    }
+    .stat { background: var(--surface); border: 1px solid rgba(214,226,236,.8); border-radius: 18px; box-shadow: var(--shadow); padding: 20px 22px; }
+    .stat-label { color: var(--muted); font-size: 12px; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
+    .stat-value { margin-top: 7px; font-size: 28px; font-weight: 950; letter-spacing: -.03em; }
+    .stat-detail { margin-top: 3px; color: var(--muted); font-size: 13px; }
+    .workspace { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+    .toolbar { display: grid; grid-template-columns: minmax(260px, 1fr) auto auto; gap: 14px; padding: 22px; border-bottom: 1px solid var(--line); align-items: center; }
+    .search { position: relative; }
+    .search svg { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); width: 20px; color: #71869a; }
+    .search input, .uf-filter {
+      width: 100%; min-height: 48px; border: 1px solid #c9d9e6; border-radius: 13px; background: #fbfdff; color: var(--ink); outline: 0;
+    }
+    .search input { padding: 0 16px 0 46px; }
+    .search input:focus, .uf-filter:focus { border-color: var(--blue); box-shadow: 0 0 0 4px rgba(7,137,206,.12); }
+    .filters { display: flex; gap: 7px; padding: 5px; background: #edf3f8; border-radius: 14px; }
+    .filter-btn { border: 0; border-radius: 10px; background: transparent; color: #5a7188; padding: 10px 13px; font-weight: 850; cursor: pointer; white-space: nowrap; }
+    .filter-btn.active { color: white; background: var(--navy); box-shadow: 0 5px 14px rgba(3,59,112,.22); }
+    .uf-filter { min-width: 105px; padding: 0 36px 0 14px; font-weight: 800; }
+    .tools { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 17px 22px; background: #f8fbfd; border-bottom: 1px solid var(--line); }
+    .results { color: var(--muted); font-size: 14px; }
+    .results strong { color: var(--ink); }
+    .tool-actions { display: flex; align-items: center; gap: 8px; }
+    .tool-btn, .view-btn { min-height: 40px; color: var(--navy); background: white; border: 1px solid #cbdbe7; padding: 0 13px; }
+    .view-btn { width: 42px; padding: 0; }
+    .view-btn.active { color: white; background: var(--navy); border-color: var(--navy); }
+    .content { padding: 25px 22px 28px; }
+    .campaign-section + .campaign-section { margin-top: 34px; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+    .section-title-wrap { display: flex; align-items: center; gap: 12px; }
+    .campaign-icon { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 13px; font-weight: 950; color: white; }
+    .campaign-icon.unip { background: linear-gradient(135deg, var(--navy), var(--blue)); }
+    .campaign-icon.sua { background: linear-gradient(135deg, #c93b3b, #f59e0b); }
+    .section-head h2 { margin: 0; font-size: 23px; letter-spacing: -.025em; }
+    .section-head p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+    .section-count { color: var(--muted); background: #f0f5f8; border: 1px solid var(--line); border-radius: 999px; padding: 8px 11px; font-size: 12px; font-weight: 850; }
+    .cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+    .card {
+      display: flex; flex-direction: column; min-height: 250px; background: white; border: 1px solid var(--line); border-radius: 18px; overflow: hidden;
+      position: relative; box-shadow: 0 7px 20px rgba(8,48,82,.055); transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .card:hover { transform: translateY(-3px); border-color: #a9c6da; box-shadow: 0 15px 31px rgba(8,48,82,.12); }
+    .card::before { content: ""; height: 4px; background: linear-gradient(90deg, var(--navy), var(--blue)); }
+    .card[data-campaign="sua"]::before { background: linear-gradient(90deg, #d23b3b, var(--orange)); }
+    .card-body { padding: 18px 18px 15px; display: flex; flex-direction: column; flex: 1; }
+    .card-top { display: flex; justify-content: space-between; gap: 12px; align-items: start; }
+    .number { width: 31px; height: 31px; border-radius: 10px; display: grid; place-items: center; color: var(--navy); background: var(--blue-soft); font-size: 12px; font-weight: 950; }
+    .published { display: inline-flex; align-items: center; gap: 6px; color: var(--green); background: #eaf8f1; border: 1px solid #c4ead7; border-radius: 999px; padding: 6px 9px; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: .04em; }
+    .published::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+    .card h3 { margin: 17px 0 3px; font-size: 21px; line-height: 1.15; letter-spacing: -.025em; }
+    .unit { color: var(--muted); font-size: 13px; line-height: 1.35; min-height: 36px; }
+    .meta { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 15px; }
+    .meta span { color: #4b647c; background: #f3f7fa; border: 1px solid #e1e9ef; border-radius: 8px; padding: 6px 8px; font-size: 11px; font-weight: 800; }
+    .card-actions { display: grid; grid-template-columns: 1fr 43px; gap: 8px; margin-top: auto; padding-top: 17px; }
+    .open-link { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 43px; border-radius: 11px; color: white; background: var(--navy); text-decoration: none; font-size: 13px; font-weight: 900; }
+    .open-link:hover { background: #07528e; }
+    .copy-btn { display: grid; place-items: center; color: var(--navy); background: #edf5fa; border: 1px solid #cfe0ea; }
+    .copy-btn svg, .open-link svg, .hero-btn svg, .tool-btn svg { width: 17px; height: 17px; }
+    body.list-view .cards { grid-template-columns: 1fr; }
+    body.list-view .card { min-height: 0; }
+    body.list-view .card::before { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; height: auto; }
+    body.list-view .card-body { display: grid; grid-template-columns: 44px minmax(180px, 1fr) minmax(230px, 1.4fr) auto 210px; align-items: center; gap: 14px; padding: 13px 15px 13px 18px; }
+    body.list-view .card-top { display: block; }
+    body.list-view .published { display: none; }
+    body.list-view .card h3 { margin: 0; }
+    body.list-view .unit { min-height: 0; }
+    body.list-view .meta { margin: 0; }
+    body.list-view .card-actions { margin: 0; padding: 0; }
+    .empty { padding: 55px 20px; text-align: center; color: var(--muted); border: 1px dashed #c4d5e2; border-radius: 16px; }
+    .empty strong { display: block; color: var(--ink); font-size: 18px; margin-bottom: 6px; }
+    .info-panel { display: grid; grid-template-columns: 1.25fr .75fr; gap: 16px; margin-top: 20px; }
+    .info-card { background: white; border: 1px solid var(--line); border-radius: 18px; padding: 20px 22px; }
+    .info-card h2 { margin: 0 0 7px; font-size: 18px; }
+    .info-card p { margin: 0; color: var(--muted); line-height: 1.55; font-size: 14px; }
+    .legend { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 13px; }
+    .legend span { display: inline-flex; align-items: center; gap: 7px; color: #4e667d; font-size: 12px; font-weight: 800; }
+    .legend i { width: 10px; height: 10px; border-radius: 50%; }
+    footer { color: #6d8092; display: flex; justify-content: space-between; gap: 20px; padding: 3px 0 38px; font-size: 12px; }
+    .toast { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 18px); z-index: 20; color: white; background: #0d2d4a; border-radius: 12px; padding: 12px 16px; box-shadow: 0 12px 30px rgba(0,0,0,.24); font-size: 13px; font-weight: 800; opacity: 0; pointer-events: none; transition: .2s ease; }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    @media (max-width: 1160px) {
+      .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .toolbar { grid-template-columns: 1fr auto; }
+      .uf-filter { grid-column: 2; }
+      body.list-view .card-body { grid-template-columns: 44px 1fr 1.2fr 180px; }
+      body.list-view .meta { display: none; }
+    }
+    @media (max-width: 860px) {
+      .hero-inner, main, footer { width: min(100% - 28px, 1480px); }
+      .hero-inner { padding-top: 18px; }
+      .hero-copy { margin-top: 42px; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .toolbar { grid-template-columns: 1fr; }
+      .filters { overflow-x: auto; }
+      .uf-filter { grid-column: auto; }
+      .tools { align-items: flex-start; flex-direction: column; }
+      .tool-actions { width: 100%; overflow-x: auto; padding-bottom: 2px; }
+      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .info-panel { grid-template-columns: 1fr; }
+      body.list-view .card-body { grid-template-columns: 38px 1fr 170px; }
+      body.list-view .unit, body.list-view .meta { display: none; }
+    }
+    @media (max-width: 590px) {
+      .topbar { align-items: flex-start; }
+      .brand { gap: 10px; }
+      .brand-logo { width: 132px; height: 84px; border-radius: 14px; padding: 7px 9px 11px; }
+      .brand-logo img { max-width: 100px; max-height: 59px; }
+      .brand-divider { height: 38px; }
+      .brand-cycle { max-width: 145px; font-size: 10px; letter-spacing: .1em; }
+      .status-pill { font-size: 0; padding: 12px; }
+      .hero-copy { margin-top: 34px; }
+      h1 { font-size: 39px; }
+      .hero-actions { flex-direction: column; }
+      .hero-btn { justify-content: center; }
+      .stats { grid-template-columns: 1fr 1fr; gap: 9px; }
+      .stat { padding: 16px; }
+      .stat-value { font-size: 23px; }
+      .toolbar, .tools, .content { padding-left: 14px; padding-right: 14px; }
+      .filter-btn { padding-left: 11px; padding-right: 11px; }
+      .cards { grid-template-columns: 1fr; }
+      .section-head { align-items: flex-start; }
+      .section-count { display: none; }
+      body.list-view .card-body { display: flex; }
+      body.list-view .unit { display: block; }
+      body.list-view .card-actions { width: 100%; margin-top: 13px; }
+      footer { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+    @media print {
+      .hero-actions, .toolbar, .tools, .card-actions, .toast { display: none !important; }
+      .hero { color: #0d2d4a; background: white; }
+      .hero-copy p { color: #506b83; }
+      .stats { transform: none; }
+      .workspace, .stat, .card { box-shadow: none; }
+      .cards { grid-template-columns: repeat(2, 1fr); }
+      .card::after { content: attr(data-url); word-break: break-all; padding: 0 18px 16px; color: #526b82; font-size: 9px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="topbar">
+        <div class="brand" aria-label="DOOH Online — Planejamento Ciclo 2027.1">
+          <span class="brand-logo"><img src="data:image/png;base64,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" alt="DOOH Online — Alcança. Impacta. Conecta."></span>
+          <span class="brand-divider" aria-hidden="true"></span>
+          <span class="brand-cycle">PLANEJAMENTO<br>CICLO 2027.1</span>
+        </div>
+        <div class="status-pill"><span class="status-dot"></span> Publicações validadas</div>
+      </div>
+      <div class="hero-copy">
+        <div class="eyebrow">Central operacional de mapas</div>
+        <h1>Todos os mercados<br>em um só lugar.</h1>
+        <p>Acesse as versões oficiais e estáveis dos mapas das campanhas UNIP Processo Seletivo e Sua Faculdade para o ciclo 2027.1.</p>
+        <div class="hero-actions">
+          <button class="hero-btn primary" id="copyEmail" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="m4 7 8 6 8-6"/></svg>
+            Copiar resumo para e-mail
+          </button>
+          <button class="hero-btn secondary" id="downloadCsv" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 19h14"/></svg>
+            Baixar lista de URLs
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="stats" aria-label="Resumo da publicação">
+      <article class="stat"><div class="stat-label">Mercados publicados</div><div class="stat-value">24</div><div class="stat-detail">20 UNIP + 4 Sua Faculdade</div></article>
+      <article class="stat"><div class="stat-label">Campanhas</div><div class="stat-value">2</div><div class="stat-detail">Organizadas em uma central</div></article>
+      <article class="stat"><div class="stat-label">Links operacionais</div><div class="stat-value">24</div><div class="stat-detail">URLs estáveis e oficiais</div></article>
+      <article class="stat"><div class="stat-label">Validação pública</div><div class="stat-value">100%</div><div class="stat-detail">Última revisão em 06/10/2026</div></article>
+    </section>
+
+    <section class="workspace" aria-labelledby="workspaceTitle">
+      <h2 id="workspaceTitle" class="sr-only">Mercados publicados</h2>
+      <div class="toolbar">
+        <label class="search">
+          <span class="sr-only">Buscar mercado ou unidade</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+          <input id="search" type="search" autocomplete="off" placeholder="Buscar mercado, unidade, estado ou região…">
+        </label>
+        <div class="filters" role="group" aria-label="Filtrar por campanha">
+          <button class="filter-btn active" type="button" data-filter="all">Todos</button>
+          <button class="filter-btn" type="button" data-filter="unip">UNIP Processo Seletivo</button>
+          <button class="filter-btn" type="button" data-filter="sua">Sua Faculdade</button>
+        </div>
+        <label>
+          <span class="sr-only">Filtrar por UF</span>
+          <select id="ufFilter" class="uf-filter"><option value="all">Todas as UFs</option></select>
+        </label>
+      </div>
+      <div class="tools">
+        <div class="results" id="results" aria-live="polite"></div>
+        <div class="tool-actions">
+          <button class="tool-btn" id="copyUrls" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg>
+            Copiar URLs visíveis
+          </button>
+          <button class="view-btn active" id="gridView" type="button" aria-label="Visualização em cartões" title="Cartões">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          </button>
+          <button class="view-btn" id="listView" type="button" aria-label="Visualização em lista" title="Lista">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3" cy="6" r="1" fill="currentColor"/><circle cx="3" cy="12" r="1" fill="currentColor"/><circle cx="3" cy="18" r="1" fill="currentColor"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="content" id="content"></div>
+    </section>
+
+    <section class="info-panel">
+      <article class="info-card">
+        <h2>Como usar esta central</h2>
+        <p>Use a busca ou os filtros para localizar o mercado. O botão <strong>Abrir mapa</strong> acessa sempre a URL operacional estável; ela pode ser adicionada aos favoritos e compartilhada com a equipe.</p>
+      </article>
+      <article class="info-card">
+        <h2>Status das campanhas</h2>
+        <p>Todos os links listados foram publicados e validados.</p>
+        <div class="legend"><span><i style="background:#0789ce"></i> UNIP Processo Seletivo</span><span><i style="background:#f59e0b"></i> Sua Faculdade</span><span><i style="background:#168a54"></i> Publicado</span></div>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <span>Central de Mapas — Planejamento UNIP 2027.1</span>
+    <span>Links oficiais em appestrategia.doohonline.com</span>
+  </footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script id="portal-data" type="application/json">{"schema": "portal-operacao-fop-cps-035-rc1/v1", "generatedAtUtc": "2026-10-07T02:19:25.613345+00:00", "proposedPublicUrl": "https://appestrategia.doohonline.com/mapas_ciclo_2027_1.html", "records": [{"campaignId": "unip", "campaign": "UNIP PROCESSO SELETIVO 2027.1", "market": "Alphaville", "unit": "UNIP Alphaville", "uf": "SP", "region": "Sudeste", "locations": 55, "url": "https://appestrategia.doohonline.com/planestrategicodooh_Alphaville_b666c530.html", "immutableUrl": "https://appestrategia.doohonline.com/planestrategicodooh_Alphaville_2027_1_fbfe19b9.html", "version": "fbfe19b9", "publishedCommit": "459d042424e3d19c2bb3286f2ed269cf225d60e7"}, {"campaignId": "unip", "campaign": "UNIP PROCESSO SELETIVO 2027.1", "market": "Anchieta", "unit": "UNIP Anchieta", "uf": "SP", "region": "Sudeste", "locations": 151, "url": "https://appestrategia.doohonline.com/planestrategicodooh_Anchieta_4f4e86d7.html", "immutableUrl": "https://appestrategia.doohonline.com/planestrategicodooh_Anchieta_2027_1_23695618.html", "version": "23695618", "publishedCommit": "459d042424e3d19c2bb3286f2ed269cf225d60e7"}, {"campaignId": "unip", "campaign": "UNIP PROCESSO SELETIVO 2027.1", "market": "Araraquara", "unit": "UNIP Araraquara", "uf": "SP", "region": "Sudeste", "locations": 162, "url": "https://appestrategia.doohonline.com/planestrategicodooh_Araraquara_c5ec6821.html", "immutableUrl": "https://appestrategia.doohonline.com/planestrategicodooh_Araraquara_2027_1_05f91b23.html", "version": "05f91b23", "publishedCommit": "459d042424e3d19c2bb3286f2ed269cf225d60e7"}, {"campaignId": "unip", "campaign": "UNIP PROCESSO SELETIVO 2027.1", "market": "Araçatuba", "unit": "UNIP Araçatuba", "uf": "SP", "region": "Sudeste", "locations": 177, "url": "https://appestrategia.doohonline.com/planestrategicodooh_Aracatuba_58dc0c13.html", "immutableUrl": "https://appestrategia.doohonline.com/planestrategicodooh_Aracatuba_2027_1_6e1514c9.html", "version": "6e1514c9", "publishedCommit": "459d042424e3d19c2bb3286f2ed269cf225d60e7"}, {"campaignId": "unip", "campaign": "UNIP PROCESSO SELETIVO 2027.1", "market": "Assis", "unit": "UNIP Assis", "uf": "SP", "region": "Sudeste", "locations": 120, "url": "https://appestrategia.doohonline.com/planestrategicodooh_Assis_0c0d0356.html", "immutableUrl": "https://appestrategia.doohonline.com/planestrategicodooh_Assis_2027_1_00b96d0e.html", "version": "00b96d0e", "publishedCommit": "459d042424e3d19c2bb3286f2ed269cf225d60e7"}, {"campaignId": "unip", "campaign": "UNIP PROCESSO SELETIVO 2027.1", "market": "Bauru", "unit": "UNIP Bauru", "uf": "SP", "region": "Sudeste", "locations": 231, "url": "https://appestrategia.doohonline.com/planestrategicodooh_Bauru_5dfde272.html", "immutableUrl": "https://appestrategia.doohonline.com/planestrategicodooh_Bauru_2027_1_b8ecc38b.html", "version": "b8ecc38b", "publishedCommit": "459d042424e3d19c2bb3286f2ed269cf225d60e7"}, {"campaignId": "unip", "campaign": "UNIP PROCESSO SELETIVO 2027.1", "market": "Brasília", "unit": "UNIP Brasília", "uf": "DF", "region": "Centro-Oeste", "locations": 169, "url": "https://appestrategia.doohonline.com/planestrategicodooh_Brasilia_5a9d9abb.html", "immutableUrl": "https://appestrategia.doohonline.com/planestrategicodooh_Brasilia_2027_1_16080ab7.html", "version": "16080ab7", "publishedCommit": "459d042424e3d19c2bb3286f2ed269cf225d60e7"}, {"campaignId": "unip", "campaign": "UNIP PROCESSO SELETIVO 2027.1", "market": "Campinas", "unit": "UNIP Campinas", "uf": "SP", "region": "Sudeste", "locations": 689, "url": "https://appestrategia.doohonline.com/planestrategicodooh_Campinas_e150d289.html", "immutableUrl": "https://appestrategia.doohonline.com/planestrategicodooh_Campinas_2027_1_d00909a4.html", "version": "d00909a4", "publishedCommit": "5ed3ae6ced3c0a76168ab564fecc241ab3045f6a"}, {"campaignId": "unip", "campaign": "UNIP PROCESSO SELETIVO 2027.1", "market": "Goiânia", "unit": "UNIP Goiânia", "uf": "GO", "region": "Centro-Oeste", "locations": 403, "url": "https://appestrategia.doohonline.com/planestrategicodooh_Goiania_8d4b3e43.html", "immutableUrl": "https://appestrategia.doohonline.com/planestrategicodooh_Goiania_2027_1_f4f6acca.html", "version": "f4f6acca", "publishedCommit": "459d042424e3d19c2bb3286f2ed269cf225d60e7"}, {"campaignId": "unip", "campaign": "UNIP PROCESSO SELETIVO 2027.1", "market": "Jundiaí", "unit": "UNIP Jundiaí", "uf": "SP", "region": "Sudeste", "locations": 417, "url": "https://appestrategia.doohonline.com/planestrategicodooh_Jundiai_0f2c5cc4.html", "immutableUrl": "https://appestrategia.doohonline.com/planestrategicodooh_Jundiai_2027_1_56731591.html", "version": "56731591", "publishedCommit": "459d042424e3d19c2bb3286f2ed269cf225d60e7"}, {"campaignId": "unip", "campaign": "UNIP PROCESSO SELETIVO 2027.1", "market": "Limeira", "unit": "UNIP Limeira", "uf": "SP", "region": "Sudeste", "locations": 373, "url": "https://appestrategia.doohonline.com/planestrategicodooh_Limeira_e4e9f855.html", "immutableUrl": "https://appestrategia.doohonline.com/planestrategicodooh_Limeira_2027_1_bc0c4d5f.html", "version": "bc0c4d5f", "publishedCommit": "5ed3ae6ced3c0a76168ab564fecc241ab3045f6a"}, {"campaignId": "unip", "campaign": "UNIP PROCESSO SELETIVO 2027.1", "market": "Manaus", "unit": "UNIP Manaus", "uf": "AM", "region": "Norte", "locations": 182, "url": "https://appestrategia.doohonline.com/planestrategicodooh_Manaus_5bbe48fb.html", "immutableUrl": "https://appestrategia.doohonline.com/planestrategicodooh_Manaus_2027_1_c3bbcc0c.html", "version": "c3bbcc0c", "publishedCommit": "459d042424e3d19c2bb3286f2ed269cf225d60e7"}, {"campaignId": "unip", "campaign": "UNIP PROCESSO SELETIVO 2027.1", "market": "Pinheiros", "unit": "UNIP - Pinheiros", "uf": "SP", "region": "Sudeste", "locations": 34, "url": "https://appestrategia.doohonline.com/planestrategicodooh_Pinheiros_fa56b6ca.html", "immutableUrl": "https://appestrategia.doohonline.com/planestrategicodooh_Pinheiros_2027_1_9ae92133.html", "version": "9ae92133", "publishedCommit": "459d042424e3d19c2bb3286f2ed269cf225d60e7"}, {"campaignId": "unip", "campaign": "UNIP PROCESSO SELETIVO 2027.1", "market": "Ribeirão Preto", "unit": "UNIP Ribeirão Preto", "uf": "SP", "region": "Sudeste", "locations": 848, "url": "https://appestrategia.doohonline.com/planestrategicodooh_RibeiraoPreto_1204717c.html", "immutableUrl": "https://appestrategia.doohonline.com/planestrategicodooh_RibeiraoPreto_2027_1_7fbd7493.html", "version": "7fbd7493", "publishedCommit": "459d042424e3d19c2bb3286f2ed269cf225d60e7"}, {"campaignId": "unip", "campaign": "UNIP PROCESSO SELETIVO 2027.1", "market": "Santos", "unit": "UNIP Santos", "uf": "SP", "region": "Sudeste", "locations": 75, "url": "https://appestrategia.doohonline.com/planestrategicodooh_Santos_22c6254f.html", "immutableUrl": "https://appestrategia.doohonline.com/planestrategicodooh_Santos_2027_1_895381f6.html", "version": "895381f6", "publishedCommit": "459d042424e3d19c2bb3286f2ed269cf225d60e7"}, {"campaignId": "unip", "campaign": "UNIP PROCESSO SELETIVO 2027.1", "market": "Sorocaba", "unit": "UNIP Sorocaba", "uf": "SP", "region": "Sudeste", "locations": 583, "url": "https://appestrategia.doohonline.com/planestrategicodooh_Sorocaba_e641ec64.html", "immutableUrl": "https://appestrategia.doohonline.com/planestrategicodooh_Sorocaba_2027_1_e73323f4.html", "version": "e73323f4", "publishedCommit": "459d042424e3d19c2bb3286f2ed269cf225d60e7"}, {"campaignId": "unip", "campaign": "UNIP PROCESSO SELETIVO 2027.1", "market": "São José do Rio Pardo", "unit": "UNIP São José do Rio Pardo", "uf": "SP", "region": "Sudeste", "locations": 226, "url": "https://appestrategia.doohonline.com/planestrategicodooh_Sao_Jose_do_Rio_Pardo_0275e36f.html", "immutableUrl": "https://appestrategia.doohonline.com/planestrategicodooh_Sao_Jose_do_Rio_Pardo_2027_1_06cd5b51.html", "version": "06cd5b51", "publishedCommit": "459d042424e3d19c2bb3286f2ed269cf225d60e7"}, {"campaignId": "unip", "campaign": "UNIP PROCESSO SELETIVO 2027.1", "market": "São José do Rio Preto", "unit": "UNIP São José do Rio Preto", "uf": "SP", "region": "Sudeste", "locations": 386, "url": "https://appestrategia.doohonline.com/planestrategicodooh_Sao_Jose_do_Rio_Preto_8e7c9e7e.html", "immutableUrl": "https://appestrategia.doohonline.com/planestrategicodooh_Sao_Jose_do_Rio_Preto_2027_1_e0700883.html", "version": "e0700883", "publishedCommit": "459d042424e3d19c2bb3286f2ed269cf225d60e7"}, {"campaignId": "unip", "campaign": "UNIP PROCESSO SELETIVO 2027.1", "market": "São José dos Campos", "unit": "UNIP São José dos Campos", "uf": "SP", "region": "Sudeste", "locations": 152, "url": "https://appestrategia.doohonline.com/planestrategicodooh_Sao_Jose_dos_Campos_de87ae5b.html", "immutableUrl": "https://appestrategia.doohonline.com/planestrategicodooh_Sao_Jose_dos_Campos_2027_1_0240d3a6.html", "version": "0240d3a6", "publishedCommit": "459d042424e3d19c2bb3286f2ed269cf225d60e7"}, {"campaignId": "unip", "campaign": "UNIP PROCESSO SELETIVO 2027.1", "market": "Tatuapé", "unit": "UNIP Tatuapé", "uf": "SP", "region": "Sudeste", "locations": 203, "url": "https://appestrategia.doohonline.com/planestrategicodooh_Tatuape_3cd5f280.html", "immutableUrl": "https://appestrategia.doohonline.com/planestrategicodooh_Tatuape_2027_1_86b39336.html", "version": "86b39336", "publishedCommit": "459d042424e3d19c2bb3286f2ed269cf225d60e7"}, {"campaignId": "sua", "campaign": "SUA FACULDADE 2027.1", "market": "Brasília", "unit": "UNIPLAN", "uf": "DF", "region": "Centro-Oeste", "locations": 169, "url": "https://appestrategia.doohonline.com/planestrategicodooh_Brasilia_Uniplan_071f0193.html", "immutableUrl": "https://appestrategia.doohonline.com/planestrategicodooh_Brasilia_Uniplan_2027_1_be069058.html", "version": "be069058", "publishedCommit": "26318e57a907fdd96932da6623b418e0a77a8b04"}, {"campaignId": "sua", "campaign": "SUA FACULDADE 2027.1", "market": "Foz do Iguaçu", "unit": "CESUFOZ (Centro de Ensino Superior de Foz do Iguaçu)", "uf": "PR", "region": "Sul", "locations": 256, "url": "https://appestrategia.doohonline.com/planestrategicodooh_Foz_do_Iguacu_eb0ad98e.html", "immutableUrl": "https://appestrategia.doohonline.com/planestrategicodooh_Foz_do_Iguacu_2027_1_55f52b05.html", "version": "55f52b05", "publishedCommit": "26318e57a907fdd96932da6623b418e0a77a8b04"}, {"campaignId": "sua", "campaign": "SUA FACULDADE 2027.1", "market": "Goiânia", "unit": "UNICEUG - Centro Universitário de Goiânia", "uf": "GO", "region": "Centro-Oeste", "locations": 403, "url": "https://appestrategia.doohonline.com/planestrategicodooh_Goiania_UNICEUG_50200a27.html", "immutableUrl": "https://appestrategia.doohonline.com/planestrategicodooh_Goiania_UNICEUG_2027_1_4704f9b7.html", "version": "4704f9b7", "publishedCommit": "26318e57a907fdd96932da6623b418e0a77a8b04"}, {"campaignId": "sua", "campaign": "SUA FACULDADE 2027.1", "market": "Itapetininga", "unit": "IIES - Itapetininga", "uf": "SP", "region": "Sudeste", "locations": 744, "url": "https://appestrategia.doohonline.com/planestrategicodooh_Itapetininga_IIES_14073278.html", "immutableUrl": "https://appestrategia.doohonline.com/planestrategicodooh_Itapetininga_IIES_2027_1_2865278a.html", "version": "2865278a", "publishedCommit": "26318e57a907fdd96932da6623b418e0a77a8b04"}]}</script>
+  <script>
+    const DATA = JSON.parse(document.getElementById('portal-data').textContent);
+    const campaignMeta = {
+      unip: { title: 'UNIP PROCESSO SELETIVO 2027.1', subtitle: '20 mercados publicados', short: 'UNIP', icon: 'U' },
+      sua: { title: 'SUA FACULDADE 2027.1', subtitle: '4 mercados publicados', short: 'SUA FACULDADE', icon: 'S' }
+    };
+    const state = { campaign: 'all', uf: 'all', query: '' };
+    const icons = {
+      external: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7"/><path d="m10 14 11-11"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>',
+      copy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg>'
+    };
+    const normalize = value => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    const escapeHtml = value => String(value).replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
+    const visible = () => DATA.records.filter(item => {
+      const campaignOk = state.campaign === 'all' || item.campaignId === state.campaign;
+      const ufOk = state.uf === 'all' || item.uf === state.uf;
+      const haystack = normalize([item.market, item.unit, item.uf, item.region, item.campaign].join(' '));
+      return campaignOk && ufOk && haystack.includes(normalize(state.query));
+    });
+    const formatLocations = number => `${number.toLocaleString('pt-BR')} ${number === 1 ? 'local planejável' : 'locais planejáveis'}`;
+
+    function card(item, index) {
+      return `<article class="card" data-campaign="${item.campaignId}" data-url="${escapeHtml(item.url)}">
+        <div class="card-body">
+          <div class="card-top"><span class="number">${String(index + 1).padStart(2,'0')}</span><span class="published">Publicado</span></div>
+          <div><h3>${escapeHtml(item.market)}</h3><div class="unit">${escapeHtml(item.unit)}</div></div>
+          <div class="meta"><span>${item.uf} · ${escapeHtml(item.region)}</span><span>${formatLocations(item.locations)}</span></div>
+          <div class="card-actions">
+            <a class="open-link" href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">Abrir mapa ${icons.external}</a>
+            <button class="copy-btn" type="button" data-copy="${escapeHtml(item.url)}" aria-label="Copiar URL de ${escapeHtml(item.market)}" title="Copiar URL">${icons.copy}</button>
+          </div>
+        </div>
+      </article>`;
+    }
+
+    function render() {
+      const items = visible();
+      const groups = ['unip','sua'].map(id => ({ id, items: items.filter(item => item.campaignId === id) })).filter(group => group.items.length);
+      document.getElementById('results').innerHTML = `<strong>${items.length}</strong> ${items.length === 1 ? 'mercado encontrado' : 'mercados encontrados'}`;
+      document.getElementById('content').innerHTML = groups.length ? groups.map(group => {
+        const meta = campaignMeta[group.id];
+        return `<section class="campaign-section" aria-labelledby="title-${group.id}">
+          <div class="section-head"><div class="section-title-wrap"><span class="campaign-icon ${group.id}">${meta.icon}</span><div><h2 id="title-${group.id}">${meta.title}</h2><p>${meta.subtitle}</p></div></div><span class="section-count">${group.items.length} nesta visualização</span></div>
+          <div class="cards">${group.items.map(card).join('')}</div>
+        </section>`;
+      }).join('') : '<div class="empty"><strong>Nenhum mercado encontrado</strong>Revise a busca ou remova algum filtro.</div>';
+      document.querySelectorAll('[data-copy]').forEach(button => button.addEventListener('click', () => copyText(button.dataset.copy, 'URL copiada.')));
+    }
+
+    async function copyText(text, message) {
+      try {
+        if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(text);
+        else {
+          const textarea = document.createElement('textarea');
+          textarea.value = text; textarea.style.position = 'fixed'; textarea.style.opacity = '0';
+          document.body.appendChild(textarea); textarea.select(); document.execCommand('copy'); textarea.remove();
+        }
+        showToast(message);
+      } catch (_) { showToast('Não foi possível copiar. Selecione o texto manualmente.'); }
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message; toast.classList.add('show');
+      clearTimeout(window.toastTimer); window.toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    function emailText(records = DATA.records) {
+      const lines = [
+        'Assunto: Mapas publicados — Planejamento UNIP 2027.1', '',
+        'Olá, equipe!', '',
+        'Os mapas de planejamento do ciclo 2027.1 estão publicados e disponíveis para a operação.',
+        `Central navegável: ${DATA.proposedPublicUrl}`, '',
+        'UNIP PROCESSO SELETIVO 2027.1 — 20 mercados'
+      ];
+      DATA.records.filter(item => item.campaignId === 'unip').forEach(item => lines.push(`• ${item.market} — ${item.url}`));
+      lines.push('', 'SUA FACULDADE 2027.1 — 4 mercados');
+      DATA.records.filter(item => item.campaignId === 'sua').forEach(item => lines.push(`• ${item.market} / ${item.unit} — ${item.url}`));
+      lines.push('', 'Todos os links acima correspondem às URLs operacionais estáveis e validadas.', '', 'Atenciosamente,');
+      return lines.join('\n');
+    }
+
+    function downloadCsv() {
+      const rows = [['CAMPANHA','MERCADO','UNIDADE','UF','REGIAO','LOCAIS_PLANEJAVEIS','URL_ESTAVEL']];
+      DATA.records.forEach(item => rows.push([item.campaign,item.market,item.unit,item.uf,item.region,item.locations,item.url]));
+      const csv = '\ufeff' + rows.map(row => row.map(value => `"${String(value).replace(/"/g,'""')}"`).join(';')).join('\r\n');
+      const link = document.createElement('a'); link.href = URL.createObjectURL(new Blob([csv], {type:'text/csv;charset=utf-8'}));
+      link.download = 'URLs_ESTAVEIS_OPERACAO_MAPAS_2027_1.csv'; document.body.appendChild(link); link.click(); link.remove();
+      setTimeout(() => URL.revokeObjectURL(link.href), 1000); showToast('Lista de URLs preparada.');
+    }
+
+    [...new Set(DATA.records.map(item => item.uf))].sort().forEach(uf => {
+      const option = document.createElement('option'); option.value = uf; option.textContent = uf; document.getElementById('ufFilter').appendChild(option);
+    });
+    document.getElementById('search').addEventListener('input', event => { state.query = event.target.value; render(); });
+    document.getElementById('ufFilter').addEventListener('change', event => { state.uf = event.target.value; render(); });
+    document.querySelectorAll('[data-filter]').forEach(button => button.addEventListener('click', () => {
+      state.campaign = button.dataset.filter; document.querySelectorAll('[data-filter]').forEach(item => item.classList.toggle('active', item === button)); render();
+    }));
+    document.getElementById('copyEmail').addEventListener('click', () => copyText(emailText(), 'Resumo para e-mail copiado.'));
+    document.getElementById('copyUrls').addEventListener('click', () => copyText(visible().map(item => `${item.market} — ${item.url}`).join('\n'), 'URLs visíveis copiadas.'));
+    document.getElementById('downloadCsv').addEventListener('click', downloadCsv);
+    document.getElementById('gridView').addEventListener('click', () => { document.body.classList.remove('list-view'); document.getElementById('gridView').classList.add('active'); document.getElementById('listView').classList.remove('active'); });
+    document.getElementById('listView').addEventListener('click', () => { document.body.classList.add('list-view'); document.getElementById('listView').classList.add('active'); document.getElementById('gridView').classList.remove('active'); });
+    render();
+  </script>
+</body>
+</html>
