@@ -491,6 +491,90 @@ body.rc28-cart-ready #continueButton {
 }
 
 </style>
+<style id="fop-cps-040-rc1-styles">
+/* FOP-CPS-040 RC1 — quatro ajustes de usabilidade aprovados. */
+
+/* 1. Carrinho ordenável e numerado. */
+.cart-item{position:relative}
+.cart-item[draggable="true"]{cursor:grab}
+.cart-item.rc40-dragging{opacity:.48;cursor:grabbing}
+.cart-item.rc40-drop-before{box-shadow:inset 0 3px 0 #0879bd}
+.cart-item.rc40-drop-after{box-shadow:inset 0 -3px 0 #0879bd}
+.cart-selection-number{
+  cursor:grab;user-select:none;touch-action:none;font-variant-numeric:tabular-nums;
+  background:#eaf5fb;color:#074c7b;border:1px solid #c4deee;font-weight:900
+}
+.cart-selection-number:active{cursor:grabbing}
+
+/* 2 e 3. Ações de consulta nos cartões. */
+.rc40-location-links{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-top:5px}
+.rc40-location-link{
+  display:inline-flex;align-items:center;gap:4px;min-height:25px;padding:4px 7px;
+  border:1px solid #6aa8d1;border-radius:6px;background:#fff;color:#075f9e!important;
+  font-size:9px;font-weight:900;line-height:1;text-decoration:none!important;white-space:nowrap
+}
+.rc40-location-link:hover,.rc40-location-link:focus-visible{background:#e8f5fd;outline:2px solid #87bddd;outline-offset:1px}
+.rc40-location-link.photo{border-color:#d98888;color:#9d2424!important}
+.rc40-location-link.photo:hover,.rc40-location-link.photo:focus-visible{background:#fff0f0;outline-color:#e4a2a2}
+.rc3-ranking-card-main .rc40-location-links{margin-top:6px}
+.period-row .ranking-main .rc40-location-links{margin-top:4px}
+.replacement-option .rc40-location-links{margin-top:7px}
+
+/* 3. Apenas a faixa de bissemanas permanece fixa; o conteúdo usa uma rolagem única. */
+.period-context{position:sticky;top:0;z-index:8;margin:-18px -20px 12px;padding:10px 20px;background:#f4f7f9;border-bottom:1px solid #d8e3ea}
+.period-context .period-tabs{margin:0}
+.replacement-panel{scroll-margin-top:88px;padding:15px!important}
+.replacement-grid{grid-template-columns:repeat(2,minmax(0,1fr));max-height:none!important;min-height:180px;overflow:visible!important;align-content:start}
+.replacement-option.rc40-replacement-card{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:start;text-align:left;cursor:default}
+.replacement-option.rc40-replacement-card .rc40-replacement-select{grid-column:1/-1;width:100%;border:0;border-top:1px solid #dce6ed;background:#eef7fc;color:#075f9e;border-radius:0 0 7px 7px;padding:7px;font-size:9px;font-weight:900;cursor:pointer}
+.replacement-option.rc40-replacement-card .rc40-replacement-select:hover{background:#dceefa}
+.replacement-option.rc40-replacement-card.rc40-disabled{opacity:.58}
+.replacement-option.rc40-replacement-card.rc40-disabled .rc40-replacement-select{cursor:not-allowed}
+.rc40-bulk-choice{display:flex;gap:8px;align-items:flex-start;min-width:0}
+.rc40-bulk-choice>input{margin-top:3px}
+.rc40-replacement-copy{min-width:0}
+.rc40-replacement-copy>b,.rc40-replacement-copy>span{display:block}
+
+/* 4. Cluster com locais selecionados: total preservado + halo e contador selecionado. */
+.rc40-inventory-cluster{background:transparent!important;border:0!important;border-radius:0!important}
+.rc40-inventory-cluster .rc40-cluster-shell{position:relative;width:44px!important;height:44px!important;min-width:44px;max-width:44px;min-height:44px;max-height:44px;aspect-ratio:1/1;margin:0!important;display:flex!important;align-items:center;justify-content:center;background:transparent!important;border:0!important;border-radius:50%!important;box-sizing:border-box;text-align:center;font:inherit}
+.rc40-inventory-cluster .rc40-cluster-total{width:36px!important;height:36px!important;min-width:36px;max-width:36px;min-height:36px;max-height:36px;aspect-ratio:1/1;flex:0 0 36px;margin:0!important;border-radius:50%!important;display:flex!important;align-items:center;justify-content:center;background:#58b43d;color:#fff;border:2px solid #fff;box-shadow:0 1px 5px rgba(0,0,0,.32);font-size:12px;font-weight:900;line-height:1!important;box-sizing:border-box}
+.rc40-cluster-has-selected .rc40-cluster-total{box-shadow:0 0 0 4px #f29a2e,0 2px 7px rgba(0,0,0,.38)}
+.rc40-cluster-selected-count{position:absolute;right:-4px;top:-4px;min-width:21px;height:21px;padding:0 5px;border:2px solid #fff;border-radius:999px;background:#ed8a18;color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;line-height:1}
+.rc40-legend-cluster{position:relative;width:22px;height:22px;flex:0 0 22px;margin-right:8px;border-radius:50%;background:#58b43d;border:3px solid #f29a2e;box-shadow:0 0 0 1px #fff}
+.rc40-legend-cluster::after{content:'2';position:absolute;right:-7px;top:-7px;min-width:14px;height:14px;padding:0 2px;border:1px solid #fff;border-radius:999px;background:#ed8a18;color:#fff;font-size:8px;font-weight:900;display:flex;align-items:center;justify-content:center}
+
+@media(max-width:820px){
+  .replacement-grid{grid-template-columns:1fr}
+  .replacement-option.rc40-replacement-card{grid-template-columns:1fr}
+}
+
+@media(max-height:800px){
+  .workflow-shell{height:calc(100vh - 16px);max-height:none}
+  .workflow-head{padding:9px 15px}
+  .workflow-head h2{font-size:18px;margin:6px 0 2px}
+  .workflow-head p{font-size:10px;margin:0}
+  .workflow-step{padding:6px 10px}
+  .workflow-tabs button{padding:10px 7px}
+  .workflow-content{padding:12px 15px}
+  .period-context{margin:-12px -15px 10px;padding:7px 15px}
+  .period-tabs{display:flex;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;padding-bottom:3px}
+  .period-tab{flex:0 0 auto;min-width:124px;padding:7px 9px}
+  .workflow-intro{padding:10px 12px;margin-bottom:9px}
+  .workflow-intro h3{font-size:15px;margin-bottom:3px}
+  .rc3-period-guidance{padding:8px 10px;margin:7px 0}
+  .period-toolbar{gap:6px;margin-bottom:8px}
+  .period-row{padding:7px 9px}
+  .replacement-panel{scroll-margin-top:70px}
+  .replacement-grid{min-height:220px}
+}
+
+@media(max-width:760px){
+  .period-context{margin:-12px -12px 10px;padding:7px 12px}
+  .replacement-panel{scroll-margin-top:64px}
+  .replacement-option.rc40-replacement-card{display:block}
+}
+</style>
 </head>
 <body>
 <div id="map" aria-label="Mapa de planejamento UNIP Bauru"></div>
@@ -3420,4 +3504,175 @@ document.documentElement.dataset.calendarFirstEditable=CAMPAIGN.bissemanas[1]?.i
 })();
 </script>
 
+<script id="fop-cps-040-rc1-adjustments">
+(function(){
+  'use strict';
+
+  const RELEASE='RC1';
+  const linkHtml=(item,location)=>{
+    if(!item)return'';
+    const stop="event.stopPropagation()";
+    return `<div class="rc40-location-links" data-location="${location||''}">${item.mapa_url?`<a class="rc40-location-link maps" href="${escapeText(item.mapa_url)}" target="_blank" rel="noopener noreferrer" draggable="false" onclick="${stop}" onpointerdown="${stop}"><i class="fa fa-map-marker-alt" aria-hidden="true"></i> Maps</a>`:''}${item.foto_url?`<a class="rc40-location-link photo" href="${escapeText(item.foto_url)}" target="_blank" rel="noopener noreferrer" draggable="false" onclick="${stop}" onpointerdown="${stop}"><i class="fa fa-camera" aria-hidden="true"></i> Foto</a>`:''}</div>`;
+  };
+
+  /* 1. Carrinho: numeração e reordenação por mouse, teclado auxiliar existente e toque. */
+  let draggedCartId=null;
+  let pointerCartId=null;
+  let pointerId=null;
+
+  function cartItems(){return [...document.querySelectorAll('#cartBody .cart-item[data-cart-id]')];}
+  function clearDropState(){cartItems().forEach(node=>node.classList.remove('rc40-drop-before','rc40-drop-after','rc40-dragging'));}
+  function orderFromCartDom(){return cartItems().map(node=>node.dataset.cartId);}
+  function validOrder(order){return order.length===cart.length&&new Set(order).size===cart.length&&order.every(id=>cart.includes(id));}
+  function commitCartOrder(order){
+    if(!validOrder(order)||order.every((id,index)=>id===cart[index])){clearDropState();return;}
+    cart=[...order];
+    invalidateWorkflowFromSelection();
+    updateCart();
+    refreshContext(false);
+    showToast('Ordem dos locais selecionados atualizada.');
+  }
+  function placeCartItem(dragged,target,clientY){
+    if(!dragged||!target||dragged===target)return;
+    const rect=target.getBoundingClientRect(),after=clientY>rect.top+rect.height/2;
+    target.parentNode.insertBefore(dragged,after?target.nextSibling:target);
+    cartItems().forEach(node=>node.classList.remove('rc40-drop-before','rc40-drop-after'));
+    target.classList.add(after?'rc40-drop-after':'rc40-drop-before');
+    cartItems().forEach((node,index)=>{const number=node.querySelector('.cart-selection-number');if(number)number.textContent=String(index+1);});
+  }
+  function enhanceCart(){
+    [...document.querySelectorAll('#cartBody .cart-item')].forEach((node,index)=>{
+      const id=cart[index];
+      if(!id)return;
+      node.dataset.cartId=id;
+      node.draggable=true;
+      node.setAttribute('aria-label',`Local ${index+1} de ${cart.length}. Arraste para mudar a posição.`);
+      const handle=node.querySelector('.cart-selection-number');
+      if(handle){
+        handle.textContent=String(index+1);
+        handle.title='Arraste para mudar a posição';
+        handle.setAttribute('aria-label',`Posição ${index+1}. Arraste para reordenar.`);
+      }
+      if(node.dataset.rc40Bound==='1')return;
+      node.dataset.rc40Bound='1';
+      node.addEventListener('dragstart',event=>{
+        if(event.target.closest('.remove')){event.preventDefault();return;}
+        draggedCartId=node.dataset.cartId;
+        node.classList.add('rc40-dragging');
+        event.dataTransfer.effectAllowed='move';
+        event.dataTransfer.setData('text/plain',draggedCartId);
+      });
+      node.addEventListener('dragover',event=>{
+        event.preventDefault();
+        const dragged=document.querySelector(`#cartBody .cart-item[data-cart-id="${CSS.escape(draggedCartId||'')}"]`);
+        placeCartItem(dragged,node,event.clientY);
+      });
+      node.addEventListener('drop',event=>{event.preventDefault();commitCartOrder(orderFromCartDom());});
+      node.addEventListener('dragend',()=>{draggedCartId=null;commitCartOrder(orderFromCartDom());clearDropState();});
+      handle?.addEventListener('pointerdown',event=>{
+        if(event.pointerType==='mouse'&&event.button!==0)return;
+        pointerCartId=node.dataset.cartId;pointerId=event.pointerId;
+        handle.setPointerCapture?.(event.pointerId);node.classList.add('rc40-dragging');event.preventDefault();
+      });
+      handle?.addEventListener('pointermove',event=>{
+        if(pointerId!==event.pointerId||!pointerCartId)return;
+        const target=document.elementFromPoint(event.clientX,event.clientY)?.closest('#cartBody .cart-item[data-cart-id]');
+        placeCartItem(node,target,event.clientY);event.preventDefault();
+      });
+      const endPointer=event=>{
+        if(pointerId!==event.pointerId)return;
+        pointerCartId=null;pointerId=null;commitCartOrder(orderFromCartDom());clearDropState();
+      };
+      handle?.addEventListener('pointerup',endPointer);
+      handle?.addEventListener('pointercancel',endPointer);
+    });
+  }
+
+  /* 2. Links em ambas as colunas do Passo 2. */
+  const baseRankingCard=rc3RankingCard;
+  rc3RankingCard=function(id,index,zone){
+    const item=byId.get(id),html=baseRankingCard(id,index,zone),links=linkHtml(item,zone==='ranked'?'ordem-preferencia':'locais-disponiveis');
+    if(!links)return html;
+    return html.replace('</div><div class="rc3-ranking-card-actions">',`${links}</div><div class="rc3-ranking-card-actions">`);
+  };
+
+  /* 3. Cartões de substituição sem botões aninhados e com consulta independente. */
+  replacementPanel=function(){
+    if(!replacementTarget)return'';
+    const periodId=replacementTarget.periodId,available=availableForPeriod(periodId);
+    const propagationId=typeof rc25PropagationTarget==='function'?rc25PropagationTarget(periodId):null;
+    const propagationLabel=propagationId?periodById(propagationId).rotulo:'';
+    if(replacementTarget.bulk){
+      const targets=[...bulkTargets].sort((a,b)=>a-b),needed=targets.length,selected=rc3BulkChoiceOrder.length,remaining=needed-selected;
+      const propagation=propagationId?`<label class="propagation-choice"><input id="bulkPropagate" type="checkbox"><span><strong>Manter essas alterações também na ${propagationLabel}</strong><small>As mesmas substituições serão aplicadas automaticamente à próxima bissemana.</small></span></label>`:'';
+      const options=available.map(id=>{
+        const item=byId.get(id),order=rc3BulkChoiceOrder.indexOf(id),isSelected=order>=0,disabled=!isSelected&&selected>=needed;
+        return `<article class="replacement-option rc40-replacement-card ${isSelected?'selected':''} ${disabled?'rc40-disabled':''}"><label class="rc40-bulk-choice"><input id="rc3Choice-${rc3EscapeAttribute(id)}" type="checkbox" ${isSelected?'checked':''} ${disabled?'disabled':''} onchange="toggleBulkChoice('${id}',this.checked)"><span class="rc40-replacement-copy"><b>${isSelected?`<span class="rc3-choice-order">Substituto ${order+1}</span>`:''}#${rankingOf(id)} · ${escapeText(item.codigo)}</b><span>${escapeText(item.logradouro||item.local_comercial||item.municipio_2022)}</span></span></label>${linkHtml(item,'substitutos')}</article>`;
+      }).join('');
+      return `<section class="period-panel replacement-panel" aria-labelledby="rc3ReplacementHeading"><b id="rc3ReplacementHeading" class="rc3-replacement-heading" tabindex="-1">2. Escolha ${needed} substituto(s)</b><div class="rc3-replacement-progress" role="status" aria-live="polite">${selected} de ${needed} substitutos selecionados</div><p class="helper">A ordem da escolha define o pareamento com as posições marcadas. Confira o resumo antes de aplicar.</p><div class="replacement-grid">${options}</div>${rc3PairPreview(targets)}${propagation}<div class="workflow-actions"><button class="workflow-button workflow-secondary" onclick="cancelReplacement()">Cancelar</button><button class="workflow-button workflow-success" ${remaining?'disabled':''} onclick="confirmBulkReplacement(${propagationId?"document.getElementById('bulkPropagate').checked":'false'})">${remaining?`Selecione mais ${remaining} substituto(s)`:`Aplicar ${needed} substituição(ões)`}</button></div></section>`;
+    }
+    const old=byId.get(periodPlans[periodId][replacementTarget.index]);
+    const propagation=propagationId?`<label class="propagation-choice"><input id="singlePropagate" type="checkbox"><span><strong>Manter esta alteração também na ${propagationLabel}</strong><small>O mesmo substituto será aplicado automaticamente à próxima bissemana.</small></span></label>`:'';
+    const options=available.map((id,index)=>{
+      const item=byId.get(id),propagate=propagationId?"document.getElementById('singlePropagate').checked":'false';
+      return `<article class="replacement-option rc40-replacement-card"><div class="rc40-replacement-copy"><b>${index===0?'Sugestão · ':''}#${rankingOf(id)} · ${escapeText(item.codigo)}</b><span>${escapeText(item.logradouro||item.local_comercial||item.municipio_2022)}</span>${linkHtml(item,'substitutos')}</div><button type="button" class="rc40-replacement-select" onclick="replacePeriodItem('${id}',${propagate})">Escolher este local</button></article>`;
+    }).join('');
+    return `<section class="period-panel replacement-panel" aria-labelledby="rc3ReplacementHeading"><b id="rc3ReplacementHeading" class="rc3-replacement-heading" tabindex="-1">Escolha o substituto para ${escapeText(old.logradouro||old.local_comercial||old.codigo)}</b><p class="helper">A primeira alternativa é apenas a melhor posição disponível do ranking original. A escolha final é sua.</p><div class="replacement-grid">${options}</div>${propagation}<div class="workflow-actions"><button class="workflow-button workflow-secondary" onclick="cancelReplacement()">Cancelar</button></div></section>`;
+  };
+
+  renderPeriods=function(){
+    const period=periodById(activePeriod),plan=periodPlans[activePeriod],selectedCount=bulkTargets.size;
+    setWorkflowHeader('Configure as bissemanas','A composição-base já foi copiada. Altere somente as exceções.');
+    const tabs=CAMPAIGN.bissemanas.map(p=>{const changes=rc3PeriodChangeCount(p.id);return `<button class="period-tab ${p.id===activePeriod?'active':''}" onclick="selectPeriod('${p.id}')">${p.rotulo} · ${periodPlans[p.id].length}/10 ✓<small>${p.inicio} a ${p.fim}</small>${changes?`<span class="rc3-period-change">${changes} alteração(ões) ✓</span>`:''}</button>`;}).join('');
+    const rows=plan.map((id,index)=>{const item=byId.get(id),status=periodStatus(id),checked=bulkTargets.has(index);return `<div class="period-row ${checked?'rc3-target-selected':''}"><input id="rc3Target${index}" type="checkbox" aria-label="Selecionar ${rc3EscapeAttribute(item.codigo)} para substituição" ${checked?'checked':''} onchange="toggleBulkTarget(${index},this.checked)"><div class="ranking-position">${index+1}</div><div class="ranking-main"><div class="ranking-code">${escapeText(item.codigo)}</div><div class="ranking-address">${escapeText(item.logradouro||item.local_comercial)}</div><div class="ranking-meta">Ranking original: ${rankingOf(id)}</div>${linkHtml(item,'locais-da-bissemana')}</div><span class="period-status ${status==='ALTERNADO'?'alternated':''}">${status}</span><button type="button" onclick="openReplacement(${index})">Substituir este local</button></div>`;}).join('');
+    const periodIndex=CAMPAIGN.bissemanas.findIndex(p=>p.id===activePeriod);
+    document.getElementById('workflowContent').innerHTML=`<div class="period-context"><div class="period-tabs">${tabs}</div></div><section class="workflow-intro"><h3 tabindex="-1">${period.rotulo} · ${period.inicio} a ${period.fim}</h3><p>Selecione um ou vários pontos para substituição. A composição sempre deve permanecer com dez faces distintas.</p></section><p class="rc3-period-guidance"><strong>1. Selecione os locais que deseja substituir.</strong><br>Para substituir apenas um local, use “Substituir este local”. Para substituir vários de uma vez, marque os locais desejados e clique em “Escolher substitutos”.</p><div class="period-toolbar">${periodIndex>0?'<button class="small-action" data-period-action="copy" data-confirmation="Período copiado" onclick="copyPreviousPeriod()">↳ Copiar período anterior</button>':''}<button class="small-action" data-period-action="restore" data-confirmation="Top 10 restaurado" onclick="restoreOriginalTop10()">↺ Restaurar Top 10 original</button><button class="small-action ${selectedCount?'rc3-next-action':''}" data-period-action="substitutes" data-confirmation="Seleção aberta" ${selectedCount?'':'disabled'} onclick="startBulkReplacement()">⇄ Escolher substitutos (${selectedCount})</button><span role="status" aria-live="polite">${selectedCount?`${selectedCount} local(is) selecionado(s). Agora escolha os substitutos.`:'Selecione pelo menos um local para continuar.'}</span></div>${rc3PeriodSuccess()}<div class="period-list">${rows}</div>${replacementPanel()}<div class="workflow-actions"><button class="workflow-button workflow-secondary" onclick="goWorkflow('strategy')">Voltar</button><div class="workflow-actions-right"><button class="workflow-button workflow-primary" onclick="goWorkflow('review')">Revisar planejamento</button></div></div>`;
+  };
+
+  function focusReplacement(){
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      const heading=document.getElementById('rc3ReplacementHeading'),panel=document.querySelector('.replacement-panel');
+      panel?.scrollIntoView({behavior:'smooth',block:'start'});heading?.focus({preventScroll:true});
+    }));
+  }
+  const baseOpenReplacement=openReplacement;
+  openReplacement=function(index){baseOpenReplacement(index);focusReplacement();};
+  const baseStartBulkReplacement=startBulkReplacement;
+  startBulkReplacement=function(){baseStartBulkReplacement();if(replacementTarget)focusReplacement();};
+  window.openReplacement=openReplacement;
+  window.startBulkReplacement=startBulkReplacement;
+
+  /* 4. O cluster preserva o total e acrescenta apenas o estado selecionado. */
+  function selectedClusterIcon(cluster){
+    const markers=cluster.getAllChildMarkers(),total=markers.length;
+    const selected=markers.reduce((count,marker)=>count+(cart.includes(marker.options?.title)?1:0),0);
+    const label=selected?`${total} locais — ${selected} selecionado${selected===1?'':'s'}`:`${total} locais`;
+    const html=`<div class="rc40-cluster-shell ${selected?'rc40-cluster-has-selected':''}" title="${label}" aria-label="${label}"><span class="rc40-cluster-total">${total}</span>${selected?`<small class="rc40-cluster-selected-count">${selected}</small>`:''}</div>`;
+    return L.divIcon({html,className:'rc40-inventory-cluster',iconSize:[44,44],iconAnchor:[22,22]});
+  }
+  function refreshSelectedClusters(){if(inventoryLayer?.refreshClusters)inventoryLayer.refreshClusters();}
+  inventoryLayer.options.iconCreateFunction=selectedClusterIcon;
+
+  function addLegend(){
+    const legend=document.querySelector('.legend-panel'),boundary=document.getElementById('municipalityBoundaryLegend');
+    if(!legend||legend.querySelector('.rc40-selected-cluster-legend'))return;
+    const row=document.createElement('div');
+    row.className='legend-item rc40-selected-cluster-legend';
+    row.title='O número central continua indicando todos os locais; o selo laranja indica quantos já foram selecionados.';
+    row.innerHTML='<span class="rc40-legend-cluster" aria-hidden="true"></span>Grupo com locais já selecionados';
+    if(boundary)legend.insertBefore(row,boundary);else legend.appendChild(row);
+  }
+
+  const baseUpdateCart=updateCart;
+  updateCart=function(){baseUpdateCart();enhanceCart();refreshSelectedClusters();};
+  window.updateCart=updateCart;
+  window.rc40CommitCartOrder=commitCartOrder;
+
+  addLegend();
+  updateCart();
+  refreshSelectedClusters();
+  document.documentElement.dataset.fopCps040Release=RELEASE;
+  if(window.__UNIP_TEST__)window.__UNIP_TEST__.fopCps040={release:RELEASE,adjustments:4,linkHtml,commitCartOrder,selectedClusterIcon};
+})();
+</script>
 </body></html>
