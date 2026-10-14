@@ -575,6 +575,84 @@ body.rc28-cart-ready #continueButton {
   .replacement-option.rc40-replacement-card{display:block}
 }
 </style>
+<style id="fop-cps-041-rc1-styles">
+/* FOP-CPS-041 RC1 — refinamentos visuais e de navegacao do Passo 3. */
+
+/* Origem da substituicao: o mesmo estado visual para fluxo individual e multiplo. */
+.period-row.rc41-replacement-origin{
+  position:relative;
+  border-color:#d98200!important;
+  border-left:5px solid #d98200!important;
+  background:#fff4d8!important;
+  box-shadow:0 0 0 2px rgba(217,130,0,.18),0 5px 14px rgba(111,72,8,.11)!important
+}
+.period-row.rc41-replacement-origin::before{
+  content:'LOCAL A SUBSTITUIR';position:absolute;right:10px;top:-8px;padding:2px 7px;
+  border-radius:999px;background:#a95f00;color:#fff;font-size:8px;font-weight:900;letter-spacing:.02em
+}
+.period-row.rc41-replacement-origin input[type="checkbox"]{accent-color:#b96800}
+.period-row .rc41-single-trigger.rc41-active{
+  border-color:#a95f00;background:#a95f00;color:#fff;box-shadow:0 3px 10px rgba(169,95,0,.22)
+}
+
+/* Acao principal do fluxo multiplo. */
+.period-toolbar .small-action.rc41-bulk-action{
+  border-color:#0069a8!important;background:#0069a8!important;color:#fff!important;
+  box-shadow:0 4px 13px rgba(0,86,142,.28)!important
+}
+.period-toolbar .small-action.rc41-bulk-action:hover,
+.period-toolbar .small-action.rc41-bulk-action:focus-visible{
+  border-color:#004f82!important;background:#005b94!important;box-shadow:0 0 0 3px rgba(0,105,168,.2),0 5px 15px rgba(0,73,121,.28)!important
+}
+
+/* Nos substitutos, o endereco e a informacao primaria; codigo e ranking viram metadados. */
+.replacement-option .rc41-replacement-address{
+  display:block!important;margin:0!important;color:var(--navy)!important;font-size:11px!important;
+  font-weight:900!important;line-height:1.28!important
+}
+.replacement-option .rc41-replacement-identity{
+  display:block!important;margin-top:4px!important;color:#607485!important;font-size:9px!important;line-height:1.25!important
+}
+.rc41-suggestion-label{
+  display:inline-flex!important;align-items:center;margin:0 5px 0 0!important;padding:2px 6px;
+  border-radius:999px;background:#fff0c7;color:#855200!important;font-size:8px!important;font-weight:900
+}
+.replacement-option.selected .rc41-replacement-address{color:#0b613b!important}
+
+/* Faixa compacta: fica junto das bissemanas somente durante a escolha de substitutos. */
+.rc41-replacement-dock{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px;padding:7px 9px;
+  border:1px solid #e1a33c;border-left:5px solid #d98200;border-radius:8px;background:#fff7e5;
+  box-shadow:0 3px 11px rgba(91,64,16,.12)
+}
+.rc41-replacement-dock-copy{min-width:0;color:#704600;font-size:9px;line-height:1.25}
+.rc41-replacement-dock-copy strong{display:block;color:#533300;font-size:10px}
+.rc41-replacement-dock-copy span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rc41-replacement-dock button{
+  flex:0 0 auto;border:1px solid #a95f00;border-radius:6px;background:#fff;color:#8a4f00;
+  padding:6px 9px;font-size:9px;font-weight:900;cursor:pointer
+}
+.rc41-replacement-dock button:hover,.rc41-replacement-dock button:focus-visible{
+  background:#a95f00;color:#fff;outline:2px solid rgba(169,95,0,.2);outline-offset:1px
+}
+.replacement-panel{scroll-margin-top:132px!important}
+
+@media(max-height:800px){
+  .rc41-replacement-dock{padding:5px 7px;margin-top:5px}
+  .rc41-replacement-dock-copy span{max-width:520px}
+  .replacement-panel{scroll-margin-top:112px!important}
+}
+
+@media(max-width:760px){
+  .period-row.rc41-replacement-origin::before{display:none}
+  .rc41-replacement-dock{align-items:flex-start}
+  .rc41-replacement-dock-copy span{max-width:48vw}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .period-row.rc41-replacement-origin,.period-toolbar .small-action.rc41-bulk-action{transition:none}
+}
+</style>
 </head>
 <body>
 <div id="map" aria-label="Mapa de planejamento UNIP Anchieta"></div>
@@ -3673,6 +3751,86 @@ document.documentElement.dataset.calendarFirstEditable=CAMPAIGN.bissemanas[1]?.i
   refreshSelectedClusters();
   document.documentElement.dataset.fopCps040Release=RELEASE;
   if(window.__UNIP_TEST__)window.__UNIP_TEST__.fopCps040={release:RELEASE,adjustments:4,linkHtml,commitCartOrder,selectedClusterIcon};
+})();
+</script>
+<script id="fop-cps-041-rc1-adjustments">
+(function(){
+  'use strict';
+
+  const RELEASE='RC1';
+  const linkHtml=(item,location)=>{
+    if(!item)return'';
+    const stop="event.stopPropagation()";
+    return `<div class="rc40-location-links" data-location="${location||''}">${item.mapa_url?`<a class="rc40-location-link maps" href="${escapeText(item.mapa_url)}" target="_blank" rel="noopener noreferrer" draggable="false" onclick="${stop}" onpointerdown="${stop}"><i class="fa fa-map-marker-alt" aria-hidden="true"></i> Maps</a>`:''}${item.foto_url?`<a class="rc40-location-link photo" href="${escapeText(item.foto_url)}" target="_blank" rel="noopener noreferrer" draggable="false" onclick="${stop}" onpointerdown="${stop}"><i class="fa fa-camera" aria-hidden="true"></i> Foto</a>`:''}</div>`;
+  };
+  const addressOf=item=>item?.logradouro||item?.local_comercial||item?.municipio_2022||item?.codigo||'Local';
+
+  function replacementIdentity(id,item,index,isSelected,order){
+    const suggestion=index===0?'<span class="rc41-suggestion-label">Sugestão</span>':'';
+    const chosen=isSelected?`<span class="rc3-choice-order">Substituto ${order+1}</span>`:'';
+    return `${chosen}<b class="rc41-replacement-address">${escapeText(addressOf(item))}</b><span class="rc41-replacement-identity">${suggestion}#${rankingOf(id)} · ${escapeText(item.codigo)}</span>`;
+  }
+
+  function replacementDock(){
+    if(!replacementTarget||replacementTarget.periodId!==activePeriod)return'';
+    if(replacementTarget.bulk){
+      const count=bulkTargets.size;
+      return `<div class="rc41-replacement-dock" role="navigation" aria-label="Navegação da substituição"><div class="rc41-replacement-dock-copy"><strong>Escolha de substitutos em andamento</strong><span>${count} local(is) de origem selecionado(s)</span></div><button type="button" onclick="cancelReplacement()">← Voltar aos locais</button></div>`;
+    }
+    const item=byId.get(periodPlans[activePeriod][replacementTarget.index]);
+    return `<div class="rc41-replacement-dock" role="navigation" aria-label="Navegação da substituição"><div class="rc41-replacement-dock-copy"><strong>Escolha de substituto em andamento</strong><span>${escapeText(addressOf(item))}</span></div><button type="button" onclick="cancelReplacement()">← Voltar aos locais</button></div>`;
+  }
+
+  replacementPanel=function(){
+    if(!replacementTarget)return'';
+    const periodId=replacementTarget.periodId,available=availableForPeriod(periodId);
+    const propagationId=typeof rc25PropagationTarget==='function'?rc25PropagationTarget(periodId):null;
+    const propagationLabel=propagationId?periodById(propagationId).rotulo:'';
+    if(replacementTarget.bulk){
+      const targets=[...bulkTargets].sort((a,b)=>a-b),needed=targets.length,selected=rc3BulkChoiceOrder.length,remaining=needed-selected;
+      const propagation=propagationId?`<label class="propagation-choice"><input id="bulkPropagate" type="checkbox"><span><strong>Manter essas alterações também na ${propagationLabel}</strong><small>As mesmas substituições serão aplicadas automaticamente à próxima bissemana.</small></span></label>`:'';
+      const options=available.map((id,index)=>{
+        const item=byId.get(id),order=rc3BulkChoiceOrder.indexOf(id),isSelected=order>=0,disabled=!isSelected&&selected>=needed;
+        return `<article class="replacement-option rc40-replacement-card ${isSelected?'selected':''} ${disabled?'rc40-disabled':''}"><label class="rc40-bulk-choice"><input id="rc3Choice-${rc3EscapeAttribute(id)}" type="checkbox" ${isSelected?'checked':''} ${disabled?'disabled':''} onchange="toggleBulkChoice('${id}',this.checked)"><span class="rc40-replacement-copy">${replacementIdentity(id,item,index,isSelected,order)}</span></label>${linkHtml(item,'substitutos')}</article>`;
+      }).join('');
+      return `<section class="period-panel replacement-panel" aria-labelledby="rc3ReplacementHeading"><b id="rc3ReplacementHeading" class="rc3-replacement-heading" tabindex="-1">2. Escolha ${needed} substituto(s)</b><div class="rc3-replacement-progress" role="status" aria-live="polite">${selected} de ${needed} substitutos selecionados</div><p class="helper">A ordem da escolha define o pareamento com as posições marcadas. Confira o resumo antes de aplicar.</p><div class="replacement-grid">${options}</div>${rc3PairPreview(targets)}${propagation}<div class="workflow-actions"><button class="workflow-button workflow-secondary" onclick="cancelReplacement()">Cancelar</button><button class="workflow-button workflow-success" ${remaining?'disabled':''} onclick="confirmBulkReplacement(${propagationId?"document.getElementById('bulkPropagate').checked":'false'})">${remaining?`Selecione mais ${remaining} substituto(s)`:`Aplicar ${needed} substituição(ões)`}</button></div></section>`;
+    }
+    const old=byId.get(periodPlans[periodId][replacementTarget.index]);
+    const propagation=propagationId?`<label class="propagation-choice"><input id="singlePropagate" type="checkbox"><span><strong>Manter esta alteração também na ${propagationLabel}</strong><small>O mesmo substituto será aplicado automaticamente à próxima bissemana.</small></span></label>`:'';
+    const options=available.map((id,index)=>{
+      const item=byId.get(id),propagate=propagationId?"document.getElementById('singlePropagate').checked":'false';
+      return `<article class="replacement-option rc40-replacement-card"><div class="rc40-replacement-copy">${replacementIdentity(id,item,index,false,-1)}${linkHtml(item,'substitutos')}</div><button type="button" class="rc40-replacement-select" onclick="replacePeriodItem('${id}',${propagate})">Escolher este local</button></article>`;
+    }).join('');
+    return `<section class="period-panel replacement-panel" aria-labelledby="rc3ReplacementHeading"><b id="rc3ReplacementHeading" class="rc3-replacement-heading" tabindex="-1">Escolha o substituto para ${escapeText(addressOf(old))}</b><p class="helper">A primeira alternativa é apenas a melhor posição disponível do ranking original. A escolha final é sua.</p><div class="replacement-grid">${options}</div>${propagation}<div class="workflow-actions"><button class="workflow-button workflow-secondary" onclick="cancelReplacement()">Cancelar</button></div></section>`;
+  };
+
+  renderPeriods=function(){
+    const period=periodById(activePeriod),plan=periodPlans[activePeriod],selectedCount=bulkTargets.size;
+    const targetActive=replacementTarget&&replacementTarget.periodId===activePeriod;
+    setWorkflowHeader('Configure as bissemanas','A composição-base já foi copiada. Altere somente as exceções.');
+    const tabs=CAMPAIGN.bissemanas.map(p=>{const changes=rc3PeriodChangeCount(p.id);return `<button class="period-tab ${p.id===activePeriod?'active':''}" onclick="selectPeriod('${p.id}')">${p.rotulo} · ${periodPlans[p.id].length}/10 ✓<small>${p.inicio} a ${p.fim}</small>${changes?`<span class="rc3-period-change">${changes} alteração(ões) ✓</span>`:''}</button>`;}).join('');
+    const rows=plan.map((id,index)=>{
+      const item=byId.get(id),status=periodStatus(id),checked=bulkTargets.has(index);
+      const singleOrigin=Boolean(targetActive&&!replacementTarget.bulk&&replacementTarget.index===index);
+      const replacementOrigin=checked||singleOrigin;
+      return `<div class="period-row ${checked?'rc3-target-selected':''} ${replacementOrigin?'rc41-replacement-origin':''}" ${singleOrigin?'aria-current="true"':''}><input id="rc3Target${index}" type="checkbox" aria-label="Selecionar ${rc3EscapeAttribute(item.codigo)} para substituição" ${checked?'checked':''} onchange="toggleBulkTarget(${index},this.checked)"><div class="ranking-position">${index+1}</div><div class="ranking-main"><div class="ranking-code">${escapeText(item.codigo)}</div><div class="ranking-address">${escapeText(addressOf(item))}</div><div class="ranking-meta">Ranking original: ${rankingOf(id)}</div>${linkHtml(item,'locais-da-bissemana')}</div><span class="period-status ${status==='ALTERNADO'?'alternated':''}">${status}</span><button type="button" class="rc41-single-trigger ${singleOrigin?'rc41-active':''}" aria-pressed="${singleOrigin}" onclick="openReplacement(${index})">Substituir este local</button></div>`;
+    }).join('');
+    const periodIndex=CAMPAIGN.bissemanas.findIndex(p=>p.id===activePeriod);
+    const bulkClass=selectedCount?'rc3-next-action rc41-bulk-action':'';
+    document.getElementById('workflowContent').innerHTML=`<div class="period-context"><div class="period-tabs">${tabs}</div>${replacementDock()}</div><section class="workflow-intro"><h3 tabindex="-1">${period.rotulo} · ${period.inicio} a ${period.fim}</h3><p>Selecione um ou vários pontos para substituição. A composição sempre deve permanecer com dez faces distintas.</p></section><p class="rc3-period-guidance"><strong>1. Selecione os locais que deseja substituir.</strong><br>Para substituir apenas um local, use “Substituir este local”. Para substituir vários de uma vez, marque os locais desejados e clique em “Escolher substitutos”.</p><div class="period-toolbar">${periodIndex>0?'<button class="small-action" data-period-action="copy" data-confirmation="Período copiado" onclick="copyPreviousPeriod()">↳ Copiar período anterior</button>':''}<button class="small-action" data-period-action="restore" data-confirmation="Top 10 restaurado" onclick="restoreOriginalTop10()">↺ Restaurar Top 10 original</button><button class="small-action ${bulkClass}" data-period-action="substitutes" data-confirmation="Seleção aberta" ${selectedCount?'':'disabled'} onclick="startBulkReplacement()">⇄ Escolher substitutos (${selectedCount})</button><span role="status" aria-live="polite">${selectedCount?`${selectedCount} local(is) selecionado(s). Agora escolha os substitutos.`:'Selecione pelo menos um local para continuar.'}</span></div>${rc3PeriodSuccess()}<div class="period-list">${rows}</div>${replacementPanel()}<div class="workflow-actions"><button class="workflow-button workflow-secondary" onclick="goWorkflow('strategy')">Voltar</button><div class="workflow-actions-right"><button class="workflow-button workflow-primary" onclick="goWorkflow('review')">Revisar planejamento</button></div></div>`;
+  };
+
+  const baseCancelReplacement=cancelReplacement;
+  cancelReplacement=function(){
+    baseCancelReplacement();
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      document.querySelector('.period-toolbar')?.scrollIntoView({behavior:'smooth',block:'start'});
+    }));
+  };
+  window.cancelReplacement=cancelReplacement;
+
+  document.documentElement.dataset.fopCps041Release=RELEASE;
+  if(window.__UNIP_TEST__)window.__UNIP_TEST__.fopCps041={release:RELEASE,addressOf,replacementDock,replacementIdentity};
 })();
 </script>
 </body></html>
